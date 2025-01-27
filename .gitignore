@@ -50,3 +50,6 @@ releases/*
 node_modules
 
 coverage
+
+# used to keep track of interal testers
+testers.txt
