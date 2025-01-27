@@ -19,6 +19,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeProvider);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       themeMode: themeMode,
       title: 'Simple 5e',
       theme: light,
