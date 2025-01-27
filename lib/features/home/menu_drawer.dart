@@ -113,9 +113,9 @@ class MenuDrawer extends ConsumerWidget {
                 _buildInfoRow(Icons.person, 'Author: scott-the-programmer'),
                 _buildInfoRow(Icons.web, 'Website: scott.murray.kiwi',
                     onTap: () => _launchURL('https://scott.murray.kiwi')),
-                _buildInfoRow(Icons.code, 'GitHub: simple5e/simple5e',
-                    onTap: () =>
-                        _launchURL('https://github.com/simple5e/simple5e.git')),
+                _buildInfoRow(Icons.code, 'GitHub: Simple-5E/Simple-5E',
+                    onTap: () => _launchURL(
+                        'https://github.com/simple-5e/simple-5e.git')),
               ],
             ),
           ),
