@@ -22,7 +22,7 @@ Our goal is to provide an intentionally simple, user-friendly experience for pla
 - Intuitive spell management
 - Clean, distraction-free interface
 
-While Simple 5E may not replace full-featured 5E apps, it's perfect for players who prefer a minimalist approach to character management.
+The goal is to provide an incredibly simple and slick experience for managing characters. This app will never be fully-featured, as there are plenty of other great apps that handle that. Instead, Simple-5E is angled at beginners and casual players.
 
 ## Alternative Apps
 
