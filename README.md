@@ -10,12 +10,12 @@ Simple 5E is a streamlined Flutter application designed for Dungeons & Dragons 5
 
 Our goal is to provide an intentionally simple, user-friendly experience for players during their adventures. Simple 5E focuses on core functionality, offering a lightweight alternative to more complex character management apps.
 
-<div style="display: flex; justify-content: space-between;">
-  <img src="readme/home.png" width="130" style="float: left; margin-right: 10px;" />
-  <img src="readme/character.png" width="130" style="float: left; margin-right: 10px;" />
-  <img src="readme/spell_search.png" width="130" style="float: left; margin-right: 10px;" />
-  <img src="readme/spellbook.png" width="130" style="float: left;" />
-</div>
+<p float="left">
+  <img src="readme/home.png" width="130" />
+  <img src="readme/character.png" width="130" />
+  <img src="readme/spell_search.png" width="130" />
+  <img src="readme/spellbook.png" width="130" />
+</p>
 
 ### Key Features:
 - Easy character stat tracking
