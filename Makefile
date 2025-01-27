@@ -1,6 +1,6 @@
 # Flutter Makefile
 
-.PHONY: clean build test coverage analyze format install-deps upgrade-deps run-dev run-prod build-android build-ios build-web publish-android publish-ios mmocks
+.PHONY: clean build test coverage analyze format install-deps upgrade-deps run-dev run-prod build-android build-ios build-web publish-android publish-ios mocks
 
 APP_NAME = simple5e
 BUILD_NUMBER = $(shell date +%s)
