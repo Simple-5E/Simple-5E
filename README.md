@@ -32,11 +32,25 @@ For those seeking more comprehensive tools, consider these alternatives:
 * [5e Spells (Android)](https://play.google.com/store/apps/details?id=com.dungeondev.a5espells&hl=en-US)
 * [5e Spells (iOS)](https://apps.apple.com/us/app/spells-list-5e/id1220380339)
 
-## Suggestions?
+## Roadmap
 
-If there's any feature that you'd like to see, or bugs that you run into, please submit an issue on github with some details and i'll do my best to address it! 
+Our development plan is divided into short-term and long-term goals to continuously improve Simple 5E.
 
-## Contributing
+### Short-Term Goals 🚀
+
+- [ ] Add character notes functionality
+- [ ] Implement custom race image uploads
+- [ ] Enable custom class image uploads
+- [ ] Expand spell list beyond default 5E spells
+
+### Long-Term Vision 🔮
+
+- [ ] Implement multi-device synchronization
+- [ ] Develop a web application version
+- [ ] Create a desktop application
+- [ ] Enhance in-app theming options
+
+💡 Have a suggestion? Feel free to [open an issue](https://github.com/Simple-5E/Simple-5E/issues/new)!
 
 ### Prerequisites
 
