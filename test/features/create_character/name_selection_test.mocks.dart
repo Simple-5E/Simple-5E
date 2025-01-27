@@ -26,7 +26,7 @@ import 'package:sqflite/sqflite.dart' as _i2;
 
 class _FakeDatabase_0 extends _i1.SmartFake implements _i2.Database {
   _FakeDatabase_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+      : super(parent, parentInvocation);
 }
 
 /// A class which mocks [CharacterRepository].
@@ -39,74 +39,61 @@ class MockCharacterRepository extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Database> get database =>
-      (super.noSuchMethod(
-            Invocation.getter(#database),
-            returnValue: _i4.Future<_i2.Database>.value(
-              _FakeDatabase_0(this, Invocation.getter(#database)),
-            ),
-          )
-          as _i4.Future<_i2.Database>);
+  _i4.Future<_i2.Database> get database => (super.noSuchMethod(
+        Invocation.getter(#database),
+        returnValue: _i4.Future<_i2.Database>.value(
+          _FakeDatabase_0(this, Invocation.getter(#database)),
+        ),
+      ) as _i4.Future<_i2.Database>);
 
   @override
   _i4.Future<void> createDB(_i2.Database? db, int? version) =>
       (super.noSuchMethod(
-            Invocation.method(#createDB, [db, version]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
+        Invocation.method(#createDB, [db, version]),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
-  _i4.Future<void> clearDB() =>
-      (super.noSuchMethod(
-            Invocation.method(#clearDB, []),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
+  _i4.Future<void> clearDB() => (super.noSuchMethod(
+        Invocation.method(#clearDB, []),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
 
   @override
   _i4.Future<int> createCharacter(_i5.Character? character) =>
       (super.noSuchMethod(
-            Invocation.method(#createCharacter, [character]),
-            returnValue: _i4.Future<int>.value(0),
-          )
-          as _i4.Future<int>);
+        Invocation.method(#createCharacter, [character]),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 
   @override
-  _i4.Future<int> getNextCharacterId() =>
-      (super.noSuchMethod(
-            Invocation.method(#getNextCharacterId, []),
-            returnValue: _i4.Future<int>.value(0),
-          )
-          as _i4.Future<int>);
+  _i4.Future<int> getNextCharacterId() => (super.noSuchMethod(
+        Invocation.method(#getNextCharacterId, []),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 
   @override
-  _i4.Future<_i5.Character?> readCharacter(int? id) =>
-      (super.noSuchMethod(
-            Invocation.method(#readCharacter, [id]),
-            returnValue: _i4.Future<_i5.Character?>.value(),
-          )
-          as _i4.Future<_i5.Character?>);
+  _i4.Future<_i5.Character?> readCharacter(int? id) => (super.noSuchMethod(
+        Invocation.method(#readCharacter, [id]),
+        returnValue: _i4.Future<_i5.Character?>.value(),
+      ) as _i4.Future<_i5.Character?>);
 
   @override
-  _i4.Future<List<_i5.Character>> readAllCharacters() =>
-      (super.noSuchMethod(
-            Invocation.method(#readAllCharacters, []),
-            returnValue: _i4.Future<List<_i5.Character>>.value(
-              <_i5.Character>[],
-            ),
-          )
-          as _i4.Future<List<_i5.Character>>);
+  _i4.Future<List<_i5.Character>> readAllCharacters() => (super.noSuchMethod(
+        Invocation.method(#readAllCharacters, []),
+        returnValue: _i4.Future<List<_i5.Character>>.value(
+          <_i5.Character>[],
+        ),
+      ) as _i4.Future<List<_i5.Character>>);
 
   @override
   _i4.Future<int> updateCharacter(_i5.Character? character) =>
       (super.noSuchMethod(
-            Invocation.method(#updateCharacter, [character]),
-            returnValue: _i4.Future<int>.value(0),
-          )
-          as _i4.Future<int>);
+        Invocation.method(#updateCharacter, [character]),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 
   @override
   _i4.Future<int> updateCharacterStat<T>(
@@ -115,16 +102,13 @@ class MockCharacterRepository extends _i1.Mock
     T? newValue,
   ) =>
       (super.noSuchMethod(
-            Invocation.method(#updateCharacterStat, [id, statName, newValue]),
-            returnValue: _i4.Future<int>.value(0),
-          )
-          as _i4.Future<int>);
+        Invocation.method(#updateCharacterStat, [id, statName, newValue]),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 
   @override
-  _i4.Future<int> deleteCharacter(int? id) =>
-      (super.noSuchMethod(
-            Invocation.method(#deleteCharacter, [id]),
-            returnValue: _i4.Future<int>.value(0),
-          )
-          as _i4.Future<int>);
+  _i4.Future<int> deleteCharacter(int? id) => (super.noSuchMethod(
+        Invocation.method(#deleteCharacter, [id]),
+        returnValue: _i4.Future<int>.value(0),
+      ) as _i4.Future<int>);
 }
