@@ -1,8 +1,6 @@
-# Simple 5E - Character Manager
+<img src="assets/banner.jpg" style="max-width: 100%;" />
 
-<p align="center">
-  <img src="assets/logo.webp" width="100" />
-</p>
+# Simple 5E - Character Manager
 
 Simple 5E is a streamlined Flutter application designed for Dungeons & Dragons 5th Edition players. It offers an intuitive interface for managing character stats and spells, enhancing your tabletop roleplaying experience.
 
