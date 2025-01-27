@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simple5e/features/create_character/classes.dart';
+import 'package:simple5e/features/create_character/race_details.dart';
+import 'package:simple5e/providers/custom_class_provider.dart';
+import 'package:simple5e/providers/custom_race_provider.dart';
 import '../../models/character.dart';
 import '../../providers/providers.dart';
+import 'dart:convert';
+import '../../models/race.dart';
+import '../../models/character_class.dart';
+import 'package:simple5e/features/create_character/class_details.dart';
+
+final currentImageIndexProvider = StateProvider<int>((ref) => 2);
 
 class FullStatsPage extends ConsumerWidget {
   final int characterId;
@@ -22,7 +32,7 @@ class FullStatsPage extends ConsumerWidget {
       BuildContext context, WidgetRef ref, Character character) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${character.name} Full Stats'),
+        title: Text('Full Stats'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8.0),
@@ -186,7 +196,15 @@ class FullStatsPage extends ConsumerWidget {
         child: SizedBox(
             height: height,
             child: InkWell(
-              onTap: editable ? () => _showEditDialog(ref, title, value) : null,
+              onTap: () {
+                if (editable) {
+                  _showEditDialog(ref, title, value);
+                } else if (title == 'Race') {
+                  _showRaceDetails(ref.context, ref, value);
+                } else if (title == 'Class') {
+                  _showClassDetails(ref.context, ref, value);
+                }
+              },
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -206,7 +224,178 @@ class FullStatsPage extends ConsumerWidget {
     );
   }
 
+  void _showRaceDetails(
+      BuildContext context, WidgetRef ref, String raceName) async {
+    Race? race;
+
+    final customRacesValue = ref.read(customRacesProvider);
+    final customRaces = customRacesValue.when(
+      data: (races) => races,
+      loading: () => <Race>[],
+      error: (_, __) => <Race>[],
+    );
+
+    try {
+      race = customRaces
+          .where((r) => r.name.toLowerCase() == raceName.toLowerCase())
+          .firstOrNull;
+
+      if (race == null) {
+        final String jsonString = await DefaultAssetBundle.of(context)
+            .loadString('assets/races/${raceName.toLowerCase()}.json');
+        final Map<String, dynamic> jsonData = json.decode(jsonString);
+        race = Race.fromJson(jsonData);
+      }
+
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: RaceDetails(
+                race: race!,
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not load details for race: $raceName')),
+        );
+      }
+    }
+  }
+
+  void _showClassDetails(
+      BuildContext context, WidgetRef ref, String className) async {
+    CharacterClass? characterClass;
+
+    final customClassesValue = ref.read(customClassesProvider);
+    final customClasses = customClassesValue.when(
+      data: (classes) => classes,
+      loading: () => <CharacterClass>[],
+      error: (_, __) => <CharacterClass>[],
+    );
+
+    try {
+      characterClass = customClasses
+          .where((c) => c.name.toLowerCase() == className.toLowerCase())
+          .firstOrNull;
+
+      characterClass ??= classes.firstWhere(
+        (c) => c.name.toLowerCase() == className.toLowerCase(),
+        orElse: () => throw Exception('Class not found'),
+      );
+
+      if (context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Scaffold(
+              body: ClassDetails(
+                characterClass: characterClass!,
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Could not load details for class: $className')),
+        );
+      }
+    }
+  }
+
   void _showEditDialog(WidgetRef ref, String title, String currentValue) {
+    if (title == 'Hit Dice') {
+      _showHitDiceEditDialog(ref, currentValue);
+    } else {
+      _showNumericEditDialog(ref, title, currentValue);
+    }
+  }
+
+  void _showHitDiceEditDialog(WidgetRef ref, String currentValue) {
+    String newValue = currentValue;
+    showDialog(
+      context: ref.context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Edit Hit Dice'),
+          content: TextField(
+            decoration: InputDecoration(hintText: 'e.g., 1d8, 2d6'),
+            controller: TextEditingController(text: currentValue),
+            onChanged: (value) {
+              newValue = value;
+            },
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Save'),
+              onPressed: () {
+                ref.read(charactersProvider.notifier).updateCharacterStat(
+                      characterId,
+                      'Hit Dice',
+                      newValue,
+                    );
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showNumericEditDialog(
+      WidgetRef ref, String title, String currentValue) {
+    if (title == 'Health Points') {
+      final textController = TextEditingController(text: currentValue);
+      showDialog(
+        context: ref.context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Edit $title'),
+            content: TextField(
+              controller: textController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                hintText: 'Enter HP value',
+              ),
+              autofocus: true,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              TextButton(
+                child: const Text('Save'),
+                onPressed: () {
+                  final newValue = int.tryParse(textController.text) ?? 0;
+                  ref.read(charactersProvider.notifier).updateCharacterStat(
+                        characterId,
+                        title,
+                        newValue,
+                      );
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     int newValue = int.tryParse(currentValue) ?? 0;
     showDialog(
       context: ref.context,

@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/data/character_repository.dart';
-import 'package:titan/data/spell_repository.dart';
-import 'package:titan/data/spell_slot_repository.dart';
-import 'package:titan/models/character.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/models/spell_slot.dart';
+import 'package:simple5e/data/character_repository.dart';
+import 'package:simple5e/data/spell_repository.dart';
+import 'package:simple5e/data/spell_slot_repository.dart';
+import 'package:simple5e/models/character.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/models/spell_slot.dart';
 
 final charactersProvider =
     StateNotifierProvider<CharactersNotifier, AsyncValue<List<Character>>>(
@@ -28,23 +28,15 @@ class CharactersNotifier extends StateNotifier<AsyncValue<List<Character>>> {
   }
 
   Future<void> updateCharacter(Character updatedCharacter) async {
-    try {
-      await CharacterRepository.instance.updateCharacter(updatedCharacter);
-      _loadCharacters();
-    } catch (e) {
-      print(e);
-    }
+    await CharacterRepository.instance.updateCharacter(updatedCharacter);
+    _loadCharacters();
   }
 
-  Future<void> updateCharacterStat(
-      int characterId, String statName, int newValue) async {
-    try {
-      await CharacterRepository.instance
-          .updateCharacterStat(characterId, statName, newValue);
-      _loadCharacters();
-    } catch (e) {
-      print(e);
-    }
+  Future<void> updateCharacterStat<T>(
+      int characterId, String statName, T newValue) async {
+    await CharacterRepository.instance
+        .updateCharacterStat<T>(characterId, statName, newValue);
+    _loadCharacters();
   }
 }
 
@@ -135,6 +127,6 @@ final addSpellProvider =
   return (Spell spell) async {
     final spellRepository = SpellRepository.instance;
     await spellRepository.addSpellToCharacter(characterId, spell.name);
-    ref.refresh(characterSpellsProvider(characterId));
+    var _ = ref.refresh(characterSpellsProvider(characterId));
   };
 });

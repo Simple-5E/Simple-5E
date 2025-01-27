@@ -1,0 +1,77 @@
+name: Simple 5E CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: 
+      - '*'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Grant hostedtoolcache permissions
+        run: sudo chown -R $(whoami) /opt/hostedtoolcache
+      
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+          
+      - name: Set Up Java
+        uses: actions/setup-java@v3.12.0
+        with:
+          distribution: 'oracle'
+          java-version: '17'
+          
+      - name: Install dependencies
+        run: make install-deps
+        
+      - name: Run format check
+        run: make format
+        
+      - name: Run analyzer
+        run: make analyze
+        
+      - name: Run tests with coverage
+        run: make coverage
+
+      - name: Check Git Status
+        run: |
+          echo "Git status before build:"
+          git status --porcelain
+          git describe --tags --dirty
+
+      - name: Build Android Debug
+        if: github.ref_type != 'tag'
+        run: make build-android-debug
+
+      - name: Build Android Release
+        if: github.ref_type == 'tag'
+        env:
+          KEY_JKS: ${{ secrets.KEY_JKS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_ALIAS: upload
+          KEYSTORE_PATH: /tmp/keystore.jks
+        run: |
+          echo "$KEY_JKS" | base64 --decode > /tmp/keystore.jks
+          make build-android-bundle
+
+      - uses: r0adkll/upload-google-play@v1
+        if: github.ref_type == 'tag'
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: com.murraydev.simple5e
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: internal
+          status: draft
+          releaseName: ${{ github.ref_name }}

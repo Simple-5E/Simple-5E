@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:titan/models/spell_slot.dart';
-import 'package:titan/data/character_repository.dart';
+import 'package:simple5e/models/spell_slot.dart';
+import 'package:simple5e/data/character_repository.dart';
 
 class SpellSlotRepository {
   static final SpellSlotRepository instance = SpellSlotRepository._init();

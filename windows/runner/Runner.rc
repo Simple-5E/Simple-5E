@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "titan" "\0"
+            VALUE "CompanyName", "com.murraydev" "\0"
+            VALUE "FileDescription", "simple5e" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "titan" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "titan.exe" "\0"
-            VALUE "ProductName", "titan" "\0"
+            VALUE "InternalName", "simple5e" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.murraydev. All rights reserved." "\0"
+            VALUE "OriginalFilename", "simple5e.exe" "\0"
+            VALUE "ProductName", "simple5e" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

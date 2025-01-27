@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/features/create_character/race_selection.dart';
-import 'package:titan/features/home/character_sheet_page.dart';
-import 'package:titan/models/character.dart';
-import 'package:titan/providers/providers.dart';
-import 'package:titan/theme/theme_provider.dart';
-import 'dart:io';
-import 'package:titan/data/character_repository.dart';
-import 'package:titan/data/spell_repository.dart';
-import 'package:titan/data/spell_slot_repository.dart';
+import 'package:simple5e/features/create_character/class_selection.dart';
+import 'package:simple5e/features/create_character/race_selection.dart';
+import 'package:simple5e/features/home/character_sheet_page.dart';
+import 'package:simple5e/features/home/menu_drawer.dart';
+import 'package:simple5e/models/character.dart';
+import 'package:simple5e/providers/providers.dart';
+import 'package:simple5e/data/character_repository.dart';
+import 'package:simple5e/data/spell_repository.dart';
+import 'package:simple5e/data/spell_slot_repository.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final charactersAsyncValue = ref.watch(charactersProvider);
@@ -20,8 +21,8 @@ class HomePage extends ConsumerWidget {
         title: const Text('My Characters'),
         elevation: 0,
       ),
-      drawer: _buildDrawer(context, ref),
-      body: _buildCharacterList(charactersAsyncValue, context),
+      drawer: const MenuDrawer(),
+      body: _buildCharacterList(charactersAsyncValue, context, ref),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToRaceSelection(context, ref),
         child: Icon(Icons.add),
@@ -29,8 +30,8 @@ class HomePage extends ConsumerWidget {
     );
   }
 
-  Widget _buildCharacterList(
-      AsyncValue<List<Character>> charactersAsyncValue, BuildContext context) {
+  Widget _buildCharacterList(AsyncValue<List<Character>> charactersAsyncValue,
+      BuildContext context, WidgetRef ref) {
     return charactersAsyncValue.when(
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (err, stack) => Center(child: Text('Error: $err')),
@@ -72,6 +73,7 @@ class HomePage extends ConsumerWidget {
                 elevation: 3,
                 child: InkWell(
                   onTap: () => _navigateToCharacterSheet(context, character),
+                  onLongPress: () => _showDeleteDialog(context, ref, character),
                   borderRadius: BorderRadius.circular(12),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -129,6 +131,43 @@ class HomePage extends ConsumerWidget {
     );
   }
 
+  void _showDeleteDialog(
+      BuildContext context, WidgetRef ref, Character character) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Delete ${character.name}?'),
+          content: Text(
+              'Are you sure you want to delete this character? This action cannot be undone.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            TextButton(
+              child: const Text('Delete'),
+              onPressed: () async {
+                await CharacterRepository.instance
+                    .deleteCharacter(character.id);
+                await SpellSlotRepository.instance
+                    .deleteSpellSlotsForCharacter(character.id);
+                await SpellRepository.instance
+                    .clearSpellsForCharacter(character.id);
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                }
+                ref.invalidate(charactersProvider);
+                ref.invalidate(currentClassPageProvider);
+                ref.invalidate(currentPageProvider);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _navigateToCharacterSheet(BuildContext context, Character character) {
     Navigator.push(
       context,
@@ -141,94 +180,7 @@ class HomePage extends ConsumerWidget {
   void _navigateToRaceSelection(BuildContext context, WidgetRef ref) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const RaceSelection()),
+      MaterialPageRoute(builder: (context) => RaceSelection()),
     ).then((_) => ref.refresh(charactersProvider));
-  }
-
-  Widget _buildDrawer(BuildContext context, WidgetRef ref) {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            child: Text(
-              'Menu',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontSize: 24,
-              ),
-            ),
-          ),
-          _buildThemeSelector(ref),
-          _buildResetDataTile(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildThemeSelector(WidgetRef ref) {
-    return Consumer(builder: (context, watch, child) {
-      final themeMode = ref.watch(themeProvider);
-      return ListTile(
-        leading: const Icon(Icons.palette),
-        title: const Text('Theme'),
-        trailing: DropdownButton<ThemeMode>(
-          value: themeMode,
-          onChanged: (ThemeMode? newValue) {
-            ref.read(themeProvider.notifier).state = newValue!;
-          },
-          items: ThemeMode.values
-              .map<DropdownMenuItem<ThemeMode>>((ThemeMode value) {
-            return DropdownMenuItem<ThemeMode>(
-              value: value,
-              child: Text(value.toString().split('.').last),
-            );
-          }).toList(),
-        ),
-      );
-    });
-  }
-
-  Widget _buildResetDataTile(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.restore),
-      title: const Text('Reset Data'),
-      onTap: () async {
-        await _showResetConfirmationDialog(context);
-      },
-    );
-  }
-
-  Future<void> _showResetConfirmationDialog(BuildContext context) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Confirm Reset'),
-          content: const Text(
-              'Are you sure you want to reset all data? This action cannot be undone.'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-            TextButton(
-              child: const Text('Reset'),
-              onPressed: () => Navigator.of(context).pop(true),
-            ),
-          ],
-        );
-      },
-    );
-
-    if (confirmed == true) {
-      await SpellSlotRepository.instance.clearDB();
-      await SpellRepository.instance.clearDB();
-      await CharacterRepository.instance.clearDB();
-      exit(0);
-    }
   }
 }

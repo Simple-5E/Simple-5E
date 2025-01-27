@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/providers/providers.dart';
+import 'package:simple5e/providers/providers.dart';
 
 class BasicInfoPage extends ConsumerWidget {
   const BasicInfoPage({super.key});
@@ -38,7 +38,6 @@ class BasicInfoPage extends ConsumerWidget {
                 onPressed: () {
                   if (creationState.name.isNotEmpty) {
                     // Navigate to the next page
-                    print('Name: ${creationState.name}');
                     Navigator.pushNamed(
                         context, '/next_page'); // Replace with actual route
                   } else {

@@ -1,0 +1,28 @@
+{
+  "name": "Half-Orc",
+  "description": "Half-orcs have traits deriving from their orc ancestry, including increased strength and constitution, faster maturity, and a tendency towards chaos.",
+  "abilityScoreIncrease": "Your Strength score increases by 2, and your Constitution score increases by 1.",
+  "age": "Half-orcs mature faster than humans, reaching adulthood around age 14 and rarely living longer than 75 years.",
+  "alignment": "Half-orcs inherit a tendency towards chaos from their orc parents and are not strongly inclined towards good.",
+  "size": "Half-orcs are larger and bulkier than humans, ranging from 5 to well over 6 feet tall. They are size Medium.",
+  "speed": "Your base walking speed is 30 feet.",
+  "languages": "You can speak, read, and write Common and Orc. Orc is a harsh language with no script of its own.",
+  "abilities": [
+    {
+      "name": "Darkvision",
+      "description": "You have superior vision in dark and dim conditions, able to see in dim light within 60 feet of you as if it were bright light."
+    },
+    {
+      "name": "Menacing",
+      "description": "You gain proficiency in the Intimidation skill."
+    },
+    {
+      "name": "Relentless Endurance",
+      "description": "When reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. Can't be used again until a long rest."
+    },
+    {
+      "name": "Savage Attacks",
+      "description": "When you score a critical hit with a melee weapon attack, you can roll one of the weapon's damage dice one additional time and add it to the extra damage of the critical hit."
+    }
+  ]
+}

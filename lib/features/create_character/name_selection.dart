@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/data/character_repository.dart';
-import 'package:titan/features/home/home_page.dart';
-import 'package:titan/models/character.dart';
-import 'package:titan/models/race.dart';
-import 'package:titan/models/character_class.dart';
-import 'package:titan/providers/providers.dart';
+import 'package:simple5e/data/character_repository.dart';
+import 'package:simple5e/features/home/home_page.dart';
+import 'package:simple5e/models/character.dart';
+import 'package:simple5e/models/race.dart';
+import 'package:simple5e/models/character_class.dart';
+import 'package:simple5e/providers/providers.dart';
+import 'package:simple5e/widgets/class_image_widget.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-// State class for name selection
 class NameSelectionState {
   final String name;
   final bool isValid;
@@ -32,7 +33,6 @@ class NameSelectionState {
   }
 }
 
-// Provider for name selection state
 final nameSelectionStateProvider = StateNotifierProvider.autoDispose<
     NameSelectionNotifier, NameSelectionState>((ref) {
   return NameSelectionNotifier();
@@ -53,7 +53,6 @@ class NameSelectionNotifier extends StateNotifier<NameSelectionState> {
   }
 }
 
-// Main widget
 class NameSelection extends ConsumerWidget {
   final Race selectedRace;
   final CharacterClass selectedClass;
@@ -75,6 +74,15 @@ class NameSelection extends ConsumerWidget {
 
     try {
       final id = await _characterRepository.getNextCharacterId();
+
+      final classAssetExists = await _checkAssetExists(
+        'assets/classes/${selectedClass.name.toLowerCase()}.webp',
+      );
+
+      final assetUri = classAssetExists
+          ? 'assets/classes/${selectedClass.name.toLowerCase()}.webp'
+          : 'assets/classes/custom.webp';
+
       final character = Character(
         id: id,
         level: 1,
@@ -120,7 +128,7 @@ class NameSelection extends ConsumerWidget {
         investigation: 0,
         nature: 0,
         religion: 0,
-        assetUri: 'assets/classes/${selectedClass.name.toLowerCase()}.webp',
+        assetUri: assetUri,
       );
 
       await _characterRepository.createCharacter(character);
@@ -163,16 +171,134 @@ class NameSelection extends ConsumerWidget {
 
   List<String> _getNameSuggestions() {
     switch (selectedRace.name.toLowerCase()) {
-      case 'elf':
-        return ['Aelindra', 'Caelynn', 'Thrandil', 'Galador', 'Variel'];
+      case 'dragonborn':
+        return [
+          'Rhogar Clethinthiallor',
+          'Bharash Delmirev',
+          'Verthisath Tumembor',
+          'Akra Myastan',
+          'Kalas Nemmonis',
+          'Patrin Daardendrian',
+          'Torinn Kerkad',
+          'Heskan Ghequur',
+          'Narinda Yarjerit',
+          'Medrash Shesintor'
+        ];
       case 'dwarf':
-        return ['Thorin', 'Durgath', 'Morik', 'Brunhild', 'Kildrak'];
+        return [
+          'Thorin Ironfist',
+          'Durgath Stonefist',
+          'Morik Hammersong',
+          'Brunhild Goldweaver',
+          'Kildrak Battleforge',
+          'Barendd Rockseeker',
+          'Dagnal Ungart',
+          'Tordek Frostbeard',
+          'Gardain Deepdelver',
+          'Rurik Balderk'
+        ];
+      case 'elf':
+        return [
+          'Aelindra Galanodel',
+          'Caelynn Amakiir',
+          'Thrandil Liadon',
+          'Galador Meliamne',
+          'Variel Xiloscient',
+          'Aerandril Siannodel',
+          'Erevan Holimion',
+          'Quildenna Silverfrond',
+          'Soveliss Starweaver',
+          'Laucian Moonwhisper'
+        ];
+      case 'gnome':
+        return [
+          'Nix Beren',
+          'Boddynock Glittergem',
+          'Roondar Timbers',
+          'Zanna Ningel',
+          'Wrenn Folkor',
+          'Alston Tealeaf',
+          'Dimble Nackle',
+          'Warryn Scheppen',
+          'Murnig Garrick',
+          'Burgell Brightgleam'
+        ];
+      case 'half-elf':
+        return [
+          'Arlen Winterfall',
+          'Sarai Gladewind',
+          'Thalion Moonglow',
+          'Kyra Stormwind',
+          'Valdor Shadowweave',
+          'Silas Halfborn',
+          'Althaea Duskwalker',
+          'Corlinn Evenbreeze',
+          'Pyrran Swiftshadow',
+          'Tessia Dawncaller'
+        ];
       case 'halfling':
-        return ['Bilbo', 'Meriadoc', 'Rosie', 'Pippin', 'Frodo'];
+        return [
+          'Bilbo Baggins',
+          'Meriadoc Brandybuck',
+          'Rosie Cotton',
+          'Pippin Took',
+          'Frodo Underhill',
+          'Corrin Tealeaf',
+          'Garret Goodbarrel',
+          'Milo Brushgather',
+          'Wendell Underbough',
+          'Andry Thorngage'
+        ];
+      case 'half-orc':
+        return [
+          'Grok Bearfist',
+          'Thokk Skullcrusher',
+          'Umara Bonegrinder',
+          'Krusk Steelfang',
+          'Shaga Doomfist',
+          'Keth Bloodtusk',
+          'Morgha Ironfist',
+          'Grommash Warcry',
+          'Rendar Battleborn',
+          'Zorka Thundermaul'
+        ];
       case 'human':
-        return ['Arthur', 'Elena', 'Marcus', 'Isabella', 'Richard'];
+        return [
+          'Arthur Pendragon',
+          'Elena Blackwood',
+          'Marcus Aurelius',
+          'Isabella Valencia',
+          'Richard Hawthorne',
+          'William Thorne',
+          'Sophia Constantine',
+          'James Ironwood',
+          'Catherine Blackbriar',
+          'Alexander Storm'
+        ];
+      case 'tiefling':
+        return [
+          'Ash Shadowweaver',
+          'Orianna Duskwalker',
+          'Mephistopheles Nightshade',
+          'Lilith Thornheart',
+          'Zariel Blackfire',
+          'Crimson Flamebrand',
+          'Thistle Darkhope',
+          'Raven Cruelshadow',
+          'Morthos Dreadweaver',
+          'Tempest Hellborn'
+        ];
       default:
         return [];
+    }
+  }
+
+  Future<bool> _checkAssetExists(String path) async {
+    try {
+      await rootBundle.load(path);
+      return true;
+    } catch (_) {
+      return false;
     }
   }
 
@@ -190,8 +316,8 @@ class NameSelection extends ConsumerWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(
-                    'assets/classes/${selectedClass.name.toLowerCase()}.webp',
+                  ClassImageWidget(
+                    className: selectedClass.name,
                     fit: BoxFit.cover,
                   ),
                   const DecoratedBox(
@@ -274,26 +400,28 @@ class NameSelection extends ConsumerWidget {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  Text(
-                    'Popular ${selectedRace.name} Names:',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: _getNameSuggestions()
-                        .map((name) => ActionChip(
-                              label: Text(name),
-                              onPressed: () {
-                                _nameController.text = name;
-                                ref
-                                    .read(nameSelectionStateProvider.notifier)
-                                    .updateName(name);
-                              },
-                            ))
-                        .toList(),
-                  ),
+                  if (_getNameSuggestions().isNotEmpty) ...[
+                    Text(
+                      'Popular ${selectedRace.name} Names:',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: _getNameSuggestions()
+                          .map((name) => ActionChip(
+                                label: Text(name),
+                                onPressed: () {
+                                  _nameController.text = name;
+                                  ref
+                                      .read(nameSelectionStateProvider.notifier)
+                                      .updateName(name);
+                                },
+                              ))
+                          .toList(),
+                    ),
+                  ],
                 ],
               ),
             ),

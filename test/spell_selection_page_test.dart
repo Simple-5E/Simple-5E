@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/features/spellbook/spell_selection_page.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/data/spell_repository.dart';
+import 'package:simple5e/features/spellbook/spell_selection_page.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/data/spell_repository.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
+import 'package:simple5e/providers/providers.dart';
 
 import 'spell_selection_page_test.mocks.dart';
 
@@ -55,11 +56,16 @@ void main() {
     mockSpellRepository = MockSpellRepository();
     SpellRepository.instance = mockSpellRepository;
 
-    // Setup mock repository behavior
     when(mockSpellRepository.readAllSpells())
         .thenAnswer((_) async => mockSpells);
 
-    container = ProviderContainer();
+    // Mock readSpellsForCharacter to simulate Fireball already being in spellbook
+    when(mockSpellRepository.readSpellsForCharacter(any))
+        .thenAnswer((_) async => [mockSpells[0]]); // returns Fireball
+
+    container = ProviderContainer(
+      overrides: [],
+    );
   });
 
   Future<void> pumpSpellSelectionPage(WidgetTester tester) async {
@@ -127,23 +133,6 @@ void main() {
     expect(find.text('You touch one object...').hitTestable(), findsOneWidget);
   });
 
-  testWidgets('Add spell button shows snackbar', (WidgetTester tester) async {
-    await pumpSpellSelectionPage(tester);
-
-    // Tap add button for Fireball
-    await tester.tap(find.descendant(
-      of: find.ancestor(
-        of: find.text('Fireball'),
-        matching: find.byType(ListTile),
-      ),
-      matching: find.byIcon(Icons.add),
-    ));
-    await tester.pumpAndSettle();
-
-    // Verify snackbar appears
-    expect(find.text('Fireball added to spellbook'), findsOneWidget);
-  });
-
   testWidgets('Spells are sorted by level and then name',
       (WidgetTester tester) async {
     await pumpSpellSelectionPage(tester);
@@ -157,6 +146,93 @@ void main() {
 
     // Verify order: Cantrips first, then by level, then alphabetically
     expect(spellNames, ['Light', 'Magic Missile', 'Fireball']);
+  });
+
+  group('Spell addition tests', () {
+    testWidgets('Successfully adding a new spell shows success message',
+        (WidgetTester tester) async {
+      // Mock empty spellbook for character
+      when(mockSpellRepository.readSpellsForCharacter(any))
+          .thenAnswer((_) async => []);
+
+      await pumpSpellSelectionPage(tester);
+
+      // Try to add Magic Missile (not a duplicate)
+      await tester.tap(find.descendant(
+        of: find.ancestor(
+          of: find.text('Magic Missile'),
+          matching: find.byType(ListTile),
+        ),
+        matching: find.byIcon(Icons.add),
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Magic Missile added to spellbook'), findsOneWidget);
+    });
+
+    testWidgets('Adding duplicate spell shows error message',
+        (WidgetTester tester) async {
+      // Mock spellbook containing Fireball
+      when(mockSpellRepository.readSpellsForCharacter(any)).thenAnswer(
+          (_) async => [mockSpells[0]]); // Fireball is already in spellbook
+
+      await pumpSpellSelectionPage(tester);
+
+      // Try to add Fireball (which is already in spellbook)
+      await tester.tap(find.descendant(
+        of: find.ancestor(
+          of: find.text('Fireball'),
+          matching: find.byType(ListTile),
+        ),
+        matching: find.byIcon(Icons.add),
+      ));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Fireball is already in spellbook'), findsOneWidget);
+
+      // Verify error styling
+      final snackBar = tester.widget<SnackBar>(find.byType(SnackBar));
+      expect(
+        snackBar.backgroundColor,
+        equals(Theme.of(tester.element(find.byType(MaterialApp)))
+            .colorScheme
+            .error),
+      );
+    });
+
+    testWidgets('Verify spell add not called for duplicates',
+        (WidgetTester tester) async {
+      // Mock spellbook containing Fireball
+      when(mockSpellRepository.readSpellsForCharacter(any)).thenAnswer(
+          (_) async => [mockSpells[0]]); // Fireball is already in spellbook
+
+      var addSpellCalled = false;
+
+      // Override the add spell provider to track if it's called
+      container = ProviderContainer(
+        overrides: [
+          addSpellProvider.overrideWithProvider(
+              (characterId) => Provider((ref) => (Spell spell) async {
+                    addSpellCalled = true;
+                  })),
+        ],
+      );
+
+      await pumpSpellSelectionPage(tester);
+
+      // Try to add Fireball (which is already in spellbook)
+      await tester.tap(find.descendant(
+        of: find.ancestor(
+          of: find.text('Fireball'),
+          matching: find.byType(ListTile),
+        ),
+        matching: find.byIcon(Icons.add),
+      ));
+      await tester.pumpAndSettle();
+
+      // Verify that addSpell was never called
+      expect(addSpellCalled, false);
+    });
   });
 
   tearDown(() {

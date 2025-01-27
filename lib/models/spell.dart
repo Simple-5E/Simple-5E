@@ -8,6 +8,8 @@ class Spell {
   final String duration;
   final String description;
   final String? additionalNotes;
+  final bool isUserDefined;
+
   Spell({
     required this.name,
     required this.level,
@@ -18,6 +20,7 @@ class Spell {
     required this.duration,
     required this.description,
     this.additionalNotes,
+    this.isUserDefined = false,
   });
 
   factory Spell.fromJson(Map<String, dynamic> json) {

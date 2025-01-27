@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:titan/features/home/character_sheet_page.dart';
-import 'package:titan/models/character.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/providers/providers.dart';
+import 'package:simple5e/features/home/character_sheet_page.dart';
+import 'package:simple5e/models/character.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/providers/providers.dart';
 
 @GenerateMocks([])
 void main() {
@@ -70,7 +69,7 @@ void main() {
             investigation: 0,
             nature: 0,
             religion: 0,
-            assetUri: 'assets/green_warlock.webp',
+            assetUri: 'assets/races/dragonborn_1.webp',
             id: 0,
           ))),
       characterSpellsProvider

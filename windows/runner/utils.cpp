@@ -24,7 +24,7 @@ void CreateAndAttachConsole() {
 std::vector<std::string> GetCommandLineArguments() {
   // Convert the UTF-16 command line arguments to UTF-8 for the Engine to use.
   int argc;
-  wchar_t** argv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
+  wchar_targv = ::CommandLineToArgvW(::GetCommandLineW(), &argc);
   if (argv == nullptr) {
     return std::vector<std::string>();
   }

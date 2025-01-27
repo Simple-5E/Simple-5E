@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:titan/models/spell_slot.dart';
+import 'package:simple5e/models/spell_slot.dart';
 
 class SpellSlotModal extends StatefulWidget {
   final SpellSlot spellSlot;

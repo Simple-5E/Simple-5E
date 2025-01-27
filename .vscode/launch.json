@@ -5,18 +5,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "titan",
+      "name": "simple5e",
       "request": "launch",
       "type": "dart"
     },
     {
-      "name": "titan (profile mode)",
+      "name": "simple5e (profile mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "profile"
     },
     {
-      "name": "titan (release mode)",
+      "name": "simple5e (release mode)",
       "request": "launch",
       "type": "dart",
       "flutterMode": "release"

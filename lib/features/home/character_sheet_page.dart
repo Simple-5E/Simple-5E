@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/features/spellbook/spell_book_page.dart';
-import 'package:titan/features/stats/full_stats_page.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/models/character.dart';
-import 'package:titan/providers/providers.dart';
-import 'diamond.dart';
+import 'package:simple5e/features/spellbook/spell_book_page.dart';
+import 'package:simple5e/features/stats/full_stats_page.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/models/character.dart';
+import 'package:simple5e/providers/providers.dart';
 
 class CharacterSheetPage extends ConsumerWidget {
   final int characterId;
   const CharacterSheetPage({
-    Key? key,
+    super.key,
     required this.characterId,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,7 +63,7 @@ class CharacterSheetPage extends ConsumerWidget {
 
   Widget _buildHeroImage(Character character) {
     return Hero(
-      tag: "dash${character.id}",
+      tag: "character-${character.id}",
       child: AspectRatio(
         aspectRatio: 1920 / 1300,
         child: Image.asset(
@@ -78,27 +77,54 @@ class CharacterSheetPage extends ConsumerWidget {
 
   Widget _buildCharacterStats(
       BuildContext context, WidgetRef ref, Character character) {
-    return SizedBox(
-      height: 60,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          buildEditableDiamond(
-              context, ref, 'Armor Class', character.armorClass.toString()),
-          buildEditableDiamond(
-              context, ref, 'Level', character.level.toString()),
-          buildEditableDiamond(
-              context, ref, 'Health Points', character.healthPoints.toString()),
+          _buildStatCard(context, 'AC', character.armorClass.toString(), ref),
+          _buildStatCard(context, 'Level', character.level.toString(), ref),
+          _buildStatCard(context, 'HP', character.healthPoints.toString(), ref),
         ],
       ),
     );
   }
 
-  Widget buildEditableDiamond(
-      BuildContext context, WidgetRef ref, String title, String value) {
-    return InkWell(
-      onTap: () => _showEditDialog(context, ref, title, value),
-      child: buildDiamond(context, title.split(' ')[0], value),
+  Widget _buildStatCard(
+      BuildContext context, String label, String value, WidgetRef ref) {
+    return Expanded(
+      child: Card(
+        color: Theme.of(context).colorScheme.primary,
+        elevation: 4,
+        child: InkWell(
+          onTap: () => _showEditDialog(context, ref, label, value),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onPrimary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -203,6 +229,79 @@ class CharacterSheetPage extends ConsumerWidget {
 
   void _showEditDialog(
       BuildContext context, WidgetRef ref, String title, String currentValue) {
+    if (title == 'Hit Dice') {
+      final textController = TextEditingController(text: currentValue);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Edit $title'),
+            content: TextField(
+              controller: textController,
+              decoration: const InputDecoration(
+                hintText: 'Enter hit dice (e.g., 1d8)',
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              TextButton(
+                child: const Text('Save'),
+                onPressed: () {
+                  ref.read(charactersProvider.notifier).updateCharacterStat(
+                        characterId,
+                        title,
+                        textController.text,
+                      );
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    } else if (title == 'HP') {
+      final textController = TextEditingController(text: currentValue);
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Edit $title'),
+            content: TextField(
+              controller: textController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                hintText: 'Enter HP value',
+              ),
+              autofocus: true,
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Cancel'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+              TextButton(
+                child: const Text('Save'),
+                onPressed: () {
+                  final newValue = int.tryParse(textController.text) ?? 0;
+                  ref.read(charactersProvider.notifier).updateCharacterStat(
+                        characterId,
+                        title,
+                        newValue,
+                      );
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
     int newValue = int.tryParse(currentValue) ?? 0;
     showDialog(
       context: context,

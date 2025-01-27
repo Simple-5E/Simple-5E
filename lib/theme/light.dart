@@ -3,41 +3,41 @@ import 'package:flutter/material.dart';
 final light = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
-  primaryColor: const Color(0xFF1E88E5), // Slightly muted blue
-  hintColor: const Color(0xFF9E9E9E), // Medium Gray
-  scaffoldBackgroundColor: const Color(0xFFFAFAFA), // Very Light Gray
+  primaryColor: const Color(0x001E3C54), // Deep Blue
+  hintColor: const Color(0xFF6D7F8F), // Muted Blue Grey
+  scaffoldBackgroundColor: const Color(0xFFF0F4F8), // Very Light Blue Grey
   fontFamily: 'Roboto',
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: Color(0xFF424242)), // Dark Gray
-    bodyMedium: TextStyle(color: Color(0xFF616161)), // Medium Dark Gray
+    bodyLarge: TextStyle(color: Color(0xFF1F3751)), // Deep Blue
+    bodyMedium: TextStyle(color: Color(0xFF3A5068)), // Medium Blue
   ),
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
-    primary: Color(0xFF1E88E5), // Slightly muted blue
+    primary: Color(0xFF1F3751), // Deep Blue
     onPrimary: Colors.white,
-    primaryContainer: Color(0xFFE3F2FD), // Very Light Blue
-    onPrimaryContainer: Color(0xFF1565C0), // Darker Blue
-    secondary: Color(0xFF26A69A), // Teal
+    primaryContainer: Color(0xFFD0E4FF), // Light Blue
+    onPrimaryContainer: Color(0xFF0D1C2A), // Very Dark Blue
+    secondary: Color(0xFF4A6572), // Blue Grey
     onSecondary: Colors.white,
-    secondaryContainer: Color(0xFFE0F2F1), // Very Light Teal
-    onSecondaryContainer: Color(0xFF00796B), // Dark Teal
-    error: Color(0xFFD32F2F), // Error Red
-    onError: Colors.white, // Dark Gray
+    secondaryContainer: Color(0xFFCDE5FF), // Very Light Blue
+    onSecondaryContainer: Color(0xFF0D1C2A), // Very Dark Blue
+    error: Color(0xFFBA1A1A), // Red
+    onError: Colors.white,
     surface: Colors.white,
-    onSurface: Color(0xFF424242), // Dark Gray
-    surfaceContainerHighest: Color(0xFFEEEEEE), // Light Gray
-    onSurfaceVariant: Color(0xFF616161), // Medium Dark Gray
+    onSurface: Color(0xFF1F3751), // Deep Blue
+    surfaceContainerHighest: Color(0xFFE1E9F0), // Light Blue Grey
+    onSurfaceVariant: Color(0xFF3A5068), // Medium Blue
   ),
   cardTheme: CardTheme(
     color: Colors.white,
-    elevation: 1,
+    elevation: 2,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(16),
     ),
-    shadowColor: Colors.black.withOpacity(0.1),
+    shadowColor: const Color(0xFF1F3751).withValues(alpha: 0.1),
   ),
   appBarTheme: const AppBarTheme(
-    color: Color(0xFF1E88E5), // Slightly muted blue
+    color: Color(0xFF1F3751), // Deep Blue
     elevation: 0,
     iconTheme: IconThemeData(color: Colors.white),
     titleTextStyle: TextStyle(
@@ -49,34 +49,34 @@ final light = ThemeData(
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
     fillColor: Colors.white,
-    hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
-    labelStyle: TextStyle(color: Color(0xFF1E88E5)),
+    hintStyle: TextStyle(color: Color(0xFF6D7F8F)),
+    labelStyle: TextStyle(color: Color(0xFF1F3751)),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFFBDBDBD)),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: Color(0xFFB0BEC5)),
     ),
     focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFF1E88E5), width: 2),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: Color(0xFF1F3751), width: 2),
     ),
     enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFFBDBDBD)),
+      borderRadius: BorderRadius.circular(12),
+      borderSide: BorderSide(color: Color(0xFFB0BEC5)),
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xFF1E88E5),
+      backgroundColor: Color(0xFF1F3751),
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      elevation: 1,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      elevation: 2,
     ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFF26A69A),
+    backgroundColor: Color(0xFF4A6572),
     foregroundColor: Colors.white,
-    elevation: 2,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    elevation: 4,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
   ),
 );

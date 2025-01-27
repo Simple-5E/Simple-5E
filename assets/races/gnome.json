@@ -1,0 +1,20 @@
+{
+  "name": "Gnome",
+  "description": "Gnomes are small, intelligent beings known for their inventiveness and good-natured humor. They have a deep interest in the natural world and are often skilled in magic and technology.",
+  "abilityScoreIncrease": "Your Intelligence score increases by 2.",
+  "age": "Gnomes mature at the same rate as humans, reaching adulthood around age 40. They can live up to 350 to almost 500 years.",
+  "alignment": "Gnomes are most often good, with some leaning towards law and others towards chaos. They are generally good-hearted and playful.",
+  "size": "Gnomes are between 3 and 4 feet tall, weighing about 40 pounds. They are Small in size.",
+  "speed": "Your base walking speed is 25 feet.",
+  "languages": "You can speak, read, and write Common and Gnomish, which uses the Dwarvish script.",
+  "abilities": [
+    {
+      "name": "Darkvision",
+      "description": "You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can't discern color in darkness, only shades of gray."
+    },
+    {
+      "name": "Gnome Cunning",
+      "description": "You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic."
+    }
+  ]
+}

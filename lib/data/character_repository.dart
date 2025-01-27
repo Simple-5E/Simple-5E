@@ -1,9 +1,9 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:titan/models/character.dart';
+import 'package:simple5e/models/character.dart';
 
 class CharacterRepository {
-  static final CharacterRepository instance = CharacterRepository._init();
+  static CharacterRepository instance = CharacterRepository._init();
   static Database? _database;
 
   CharacterRepository._init();
@@ -128,7 +128,8 @@ class CharacterRepository {
     );
   }
 
-  Future<int> updateCharacterStat(int id, String statName, int newValue) async {
+  Future<int> updateCharacterStat<T>(
+      int id, String statName, T newValue) async {
     final db = await database;
     String columnName = _getColumnNameForStat(statName);
     return db.update(
@@ -142,12 +143,14 @@ class CharacterRepository {
   String _getColumnNameForStat(String statName) {
     switch (statName) {
       case 'Armor Class':
+      case 'AC':
         return 'armorClass';
       case 'Initiative':
         return 'initiative';
       case 'Speed':
         return 'speed';
       case 'Health Points':
+      case 'HP':
         return 'healthPoints';
       case 'Temporary Points':
         return 'temporaryPoints';

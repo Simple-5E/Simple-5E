@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/theme/dark.dart';
-import 'package:titan/theme/light.dart';
-import 'package:titan/theme/theme_provider.dart';
-import 'package:titan/features/home/home_page.dart';
-import 'package:titan/data/database_init.dart';
+import 'package:simple5e/theme/dark.dart';
+import 'package:simple5e/theme/light.dart';
+import 'package:simple5e/theme/theme_provider.dart';
+import 'package:simple5e/features/home/home_page.dart';
+import 'package:simple5e/data/database_init.dart';
+import 'package:simple5e/features/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DatabaseInitializer.instance.initializeDatabase();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -23,7 +23,16 @@ class MyApp extends ConsumerWidget {
       title: 'Simple 5e',
       theme: light,
       darkTheme: dark,
-      home: HomePage(),
+      home: FutureBuilder(
+        future: DatabaseInitializer.instance.initializeDatabase(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return HomePage();
+          } else {
+            return const SplashScreen();
+          }
+        },
+      ),
     );
   }
 }

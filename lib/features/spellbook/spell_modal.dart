@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:titan/models/spell.dart';
+import 'package:simple5e/models/spell.dart';
 
 class SpellModal extends StatelessWidget {
   final Spell spell;

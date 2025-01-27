@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/features/spellbook/spell_selection_page.dart';
-import 'package:titan/features/spellbook/spell_slot_widget.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/models/spell_slot.dart';
-import 'package:titan/providers/providers.dart';
+import 'package:simple5e/features/spellbook/spell_selection_page.dart';
+import 'package:simple5e/features/spellbook/spell_slot_widget.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/models/spell_slot.dart';
+import 'package:simple5e/providers/providers.dart';
 import 'package:expandable/expandable.dart';
 
 class SpellbookPage extends ConsumerWidget {
@@ -22,7 +22,7 @@ class SpellbookPage extends ConsumerWidget {
         ref.watch(characterSpellSlotsProvider(characterId));
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Spellbook'),
         centerTitle: true,
@@ -88,7 +88,7 @@ class SpellbookPage extends ConsumerWidget {
                 color: Theme.of(context)
                     .colorScheme
                     .secondaryContainer
-                    .withOpacity(0.2),
+                    .withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Icon(
@@ -138,7 +138,10 @@ class SpellbookPage extends ConsumerWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                color: Theme.of(context)
+                    .colorScheme
+                    .shadow
+                    .withValues(alpha: 0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 2),
               ),
@@ -212,7 +215,7 @@ class SpellbookPage extends ConsumerWidget {
                                     decoration: BoxDecoration(
                                       color: Theme.of(context)
                                           .colorScheme
-                                          .surfaceVariant,
+                                          .surfaceContainerHighest,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Icon(
@@ -239,8 +242,8 @@ class SpellbookPage extends ConsumerWidget {
                                 decoration: BoxDecoration(
                                   color: Theme.of(context)
                                       .colorScheme
-                                      .surfaceVariant
-                                      .withOpacity(0.5),
+                                      .secondaryContainer
+                                      .withValues(alpha: 0.5),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Column(
@@ -271,9 +274,7 @@ class SpellbookPage extends ConsumerWidget {
                                   ),
                                   icon: const Icon(Icons.delete_outline),
                                   label: const Text('Remove'),
-                                  onPressed: () {
-                                    // TODO: Implement remove spell
-                                  },
+                                  onPressed: () {},
                                 ),
                               ),
                             ],
@@ -306,7 +307,7 @@ class SpellbookPage extends ConsumerWidget {
         Text(
           content,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 1.5,
               ),
         ),

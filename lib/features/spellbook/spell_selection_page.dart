@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/providers/providers.dart';
-import 'package:titan/data/spell_repository.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/providers/providers.dart';
+import 'package:simple5e/data/spell_repository.dart';
 import 'package:expandable/expandable.dart';
+import 'package:simple5e/features/spellbook/custom_spell_form.dart';
 
 class SpellSelectionPage extends ConsumerStatefulWidget {
   final int characterId;
@@ -94,16 +95,49 @@ class _SpellSelectionPageState extends ConsumerState<SpellSelectionPage> {
                   IconButton(
                     icon: const Icon(Icons.add),
                     onPressed: () async {
-                      final addSpell =
-                          ref.read(addSpellProvider(widget.characterId));
-                      await addSpell(spell);
-                      if (context.mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('${spell.name} added to spellbook'),
-                            duration: const Duration(seconds: 2),
-                          ),
-                        );
+                      try {
+                        final spellRepo = SpellRepository.instance;
+                        final characterSpells = await spellRepo
+                            .readSpellsForCharacter(widget.characterId);
+
+                        if (characterSpells.any((s) => s.name == spell.name)) {
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    '${spell.name} is already in spellbook'),
+                                duration: const Duration(seconds: 2),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.error,
+                              ),
+                            );
+                          }
+                          return;
+                        }
+
+                        final addSpell =
+                            ref.read(addSpellProvider(widget.characterId));
+                        await addSpell(spell);
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${spell.name} added to spellbook'),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        }
+                      } catch (e) {
+                        if (mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content:
+                                  Text('Error adding spell: ${e.toString()}'),
+                              duration: const Duration(seconds: 2),
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.error,
+                            ),
+                          );
+                        }
                       }
                     },
                   ),
@@ -127,7 +161,7 @@ class _SpellSelectionPageState extends ConsumerState<SpellSelectionPage> {
                       color: Theme.of(context)
                           .colorScheme
                           .secondaryContainer
-                          .withOpacity(0.3),
+                          .withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(
@@ -201,6 +235,26 @@ class _SpellSelectionPageState extends ConsumerState<SpellSelectionPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Spells'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CustomSpellForm(
+                    onSpellCreated: (Spell newSpell) {
+                      setState(() {
+                        allSpells.add(newSpell);
+                        _filterSpells();
+                      });
+                    },
+                  ),
+                ),
+              );
+            },
+            tooltip: 'Create Custom Spell',
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(120),
           child: Padding(

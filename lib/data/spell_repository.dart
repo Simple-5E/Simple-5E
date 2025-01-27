@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:titan/models/spell.dart';
-import 'package:titan/data/character_repository.dart';
+import 'package:simple5e/models/spell.dart';
+import 'package:simple5e/data/character_repository.dart';
 import 'dart:convert';
 
 class SpellRepository {
@@ -22,7 +22,8 @@ class SpellRepository {
         components TEXT,
         duration TEXT,
         description TEXT,
-        additionalNotes TEXT
+        additionalNotes TEXT,
+        isUserDefined INTEGER
       )
     ''');
 
@@ -72,6 +73,12 @@ class SpellRepository {
     return result.map((map) => _mapToSpell(map)).toList();
   }
 
+  Future<List<Spell>> readAllUserDefinedSpells() async {
+    final db = await database;
+    final result = await db.query('spells', where: 'isUserDefined = 1');
+    return result.map((map) => _mapToSpell(map)).toList();
+  }
+
   Future<void> updateSpell(Spell spell) async {
     final db = await database;
     await db.update(
@@ -109,6 +116,15 @@ class SpellRepository {
     );
   }
 
+  Future<void> clearSpellsForCharacter(int characterId) async {
+    final db = await database;
+    await db.delete(
+      'character_spells',
+      where: 'characterId = ?',
+      whereArgs: [characterId],
+    );
+  }
+
   Future<List<Spell>> readSpellsForCharacter(int characterId) async {
     final db = await database;
     final result = await db.rawQuery('''
@@ -132,6 +148,7 @@ class SpellRepository {
       'duration': spell.duration,
       'description': spell.description,
       'additionalNotes': spell.additionalNotes,
+      'isUserDefined': spell.isUserDefined ? 1 : 0,
     };
   }
 
@@ -146,6 +163,7 @@ class SpellRepository {
       duration: map['duration'] as String,
       description: map['description'] as String,
       additionalNotes: map['additionalNotes'] as String?,
+      isUserDefined: map['isUserDefined'] == 1,
     );
   }
 }

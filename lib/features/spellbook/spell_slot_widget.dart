@@ -1,10 +1,10 @@
 // lib/features/spellbook/spell_slot_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:titan/data/spell_slot_repository.dart';
-import 'package:titan/models/spell_slot.dart';
-import 'package:titan/providers/providers.dart';
-import 'package:titan/features/spellbook/spell_slot_modal.dart';
+import 'package:simple5e/data/spell_slot_repository.dart';
+import 'package:simple5e/models/spell_slot.dart';
+import 'package:simple5e/providers/providers.dart';
+import 'package:simple5e/features/spellbook/spell_slot_modal.dart';
 
 class SpellSlotWidget extends ConsumerWidget {
   final int characterId;
