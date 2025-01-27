@@ -1,42 +1,48 @@
-# Simple 5E - D&D 5E Character Manager
+# Simple 5E - Character Manager
 
-A Flutter application for managing Dungeons & Dragons 5th Edition characters. This app provides an intuitive interface for tracking character stats, spells, and other important character information.
+Simple 5E is a streamlined Flutter application designed for Dungeons & Dragons 5th Edition players. It offers an intuitive interface for managing character stats and spells, enhancing your tabletop roleplaying experience.
 
-## Features
+## Overview
 
-- Character Sheet Management
-  - Basic character information
-  - Ability scores and modifiers
-  - HP and temporary HP tracking
-  - Custom stat tracking
-  - Character image support
+Our goal is to provide an intentionally simple, user-friendly experience for players during their adventures. Simple 5E focuses on core functionality, offering a lightweight alternative to more complex character management apps.
 
-- Spellbook Management
-  - Spell browsing and filtering
-  - Add/remove spells from character spellbooks
-  - Spell details including casting time, range, and components
-  - Search functionality
-  - Class-based spell filtering
+### Key Features:
+- Easy character stat tracking
+- Intuitive spell management
+- Clean, distraction-free interface
 
-## Getting Started
+While Simple 5E may not replace full-featured 5E apps, it's perfect for players who prefer a minimalist approach to character management.
+
+## Alternative Apps
+
+For those seeking more comprehensive tools, consider these alternatives:
+
+* [the DND Beyond Player App](https://www.dndbeyond.com/player-app)
+* [5e Spells (Android)](https://play.google.com/store/apps/details?id=com.dungeondev.a5espells&hl=en-US)
+* [5e Spells (iOS)](https://apps.apple.com/us/app/spells-list-5e/id1220380339)
+
+## Suggestions?
+
+If there's any feature that you'd like to see, or bugs that you run into, please submit an issue on github with some details and i'll do my best to address it! 
+
+## Contributing
 
 ### Prerequisites
 
 - Flutter SDK (latest stable version)
 - Dart SDK
 - Android Studio / VS Code
-- Git
 
-### Installation
+## Building and Running from Source
 
 1. Clone the repository
 ```bash
-git clone https://github.com/scott-the-programmer/titan.git
+git clone https://github.com/Simple-5E/Simple-5E.git
 ```
 
 2. Install dependencies
 ```bash
-flutter pub get
+make
 ```
 
 3. Run the app
@@ -44,50 +50,22 @@ flutter pub get
 flutter run
 ```
 
-### Database Setup
+4. Running unit tests
 
-The app uses SQLite for local storage. The database will be automatically initialized on first run.
-
-## Testing
-
-Run the tests using:
 ```bash
-flutter test
+make test
 ```
-
-## Project Structure
-
-```
-lib/
-├── data/           # Data layer (repositories, database)
-├── features/       # Feature-based modules
-│   ├── home/       # Character sheet
-│   ├── spellbook/  # Spell management
-│   └── stats/      # Detailed statistics
-├── models/         # Data models
-└── providers/      # State management
-```
-
-## Built With
-
-- [Flutter](https://flutter.dev/) - UI framework
-- [Riverpod](https://riverpod.dev/) - State management
-- [SQLite](https://www.sqlite.org/) - Local database
-- [Material Design](https://material.io/) - Design system
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## Acknowledgements
 
-- D&D 5E SRD for spell data
-- Flutter community for various packages and inspiration
+**Asset Management**
+
+Assets were generated via [Replicate](https://replicate.com/) using the recraft-v3 text-to-image model. If you feel these could be improved, please modify the asset files under the assets folder and submit a PR.
+
+**Development Process**
+
+This pet project utilized Large Language Models (LLMs) to bootstrap many components and widgets. Claude Sonnet was exclusively used with [Continue.dev](https://www.continue.dev/) to assist in the development process.
