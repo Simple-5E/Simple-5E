@@ -108,7 +108,7 @@ class MenuDrawer extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const Text('A streamlined D&D 5E character management app.'),
+                const Text('A streamlined 5E character management app.'),
                 const SizedBox(height: 20),
                 _buildInfoRow(Icons.person, 'Author: scott-the-programmer'),
                 _buildInfoRow(Icons.web, 'Website: scott.murray.kiwi',
