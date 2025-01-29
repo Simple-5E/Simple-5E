@@ -3,7 +3,7 @@ import 'package:simple5e/models/spell_slot.dart';
 import 'package:simple5e/data/character_repository.dart';
 
 class SpellSlotRepository {
-  static final SpellSlotRepository instance = SpellSlotRepository._init();
+  static SpellSlotRepository instance = SpellSlotRepository._init();
   final CharacterRepository _characterRepository = CharacterRepository.instance;
 
   SpellSlotRepository._init();
