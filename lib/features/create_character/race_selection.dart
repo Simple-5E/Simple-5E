@@ -55,11 +55,10 @@ class RaceSelection extends ConsumerWidget {
           width: 8,
           height: 8,
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: current == index
-                ? Theme.of(context).primaryColor
-                : Colors.grey.withValues(alpha: 0.5),
-          ),
+              shape: BoxShape.circle,
+              color: current == index
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).hintColor),
         ),
       ),
     );

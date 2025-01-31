@@ -28,8 +28,8 @@ class ClassSelection extends ConsumerWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: current == index
-                ? Theme.of(context).primaryColor
-                : Colors.grey.withValues(alpha: 0.5),
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).hintColor,
           ),
         ),
       ),
