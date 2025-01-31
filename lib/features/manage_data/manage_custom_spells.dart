@@ -165,7 +165,6 @@ class ManageCustomSpellsPage extends ConsumerWidget {
           body: CustomSpellForm(
             onSpellCreated: (Spell newSpell) {
               ref.read(userDefinedSpellsProvider.notifier).addSpell(newSpell);
-              Navigator.pop(context);
             },
           ),
         ),
