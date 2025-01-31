@@ -153,10 +153,14 @@ class SpellRepository {
   }
 
   Spell _mapToSpell(Map<String, dynamic> map) {
+    var classes = map['classes'] as String;
+    if (classes.isEmpty) {
+      classes = '[]';
+    }
     return Spell(
       name: map['name'] as String,
       level: map['level'] as String,
-      classes: List<String>.from(jsonDecode(map['classes'])),
+      classes: List<String>.from(jsonDecode(classes)),
       castingTime: map['castingTime'] as String,
       range: map['range'] as String,
       components: map['components'] as String,
