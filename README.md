@@ -2,12 +2,12 @@
 <img src="assets/banner.jpg" style="max-width: 100%;" />
 
 
-Simple 5E is a streamlined Flutter application compatible with 5E. It offers an intuitive interface for managing character stats and spells, enhancing your tabletop roleplaying experience.
+Simple 5E is a simple and intuitive 5E compatible character tracker. Keep track of your characters, abilities and spells across your adventures!
 
 
 ## Overview
 
-Our goal is to provide an intentionally simple, user-friendly experience for players during their adventures. Simple 5E focuses on core functionality, offering a lightweight alternative to more complex character management apps.
+The goal is to provide an intentionally simple, user-friendly experience for players during their adventures. Simple 5E focuses on core functionality, offering a lightweight alternative to more complex character management apps.
 
 <p float="left" align="center">
   <img src="readme/home.png" width="130" />
@@ -17,32 +17,30 @@ Our goal is to provide an intentionally simple, user-friendly experience for pla
 </p>
 
 ### Key Features:
-- Easy character stat tracking
-- Intuitive spell management
-- Clean, distraction-free interface
 
-The goal is to provide an incredibly simple and slick experience for managing characters. This app will never be fully-featured, as there are plenty of other great apps that handle that. Instead, Simple-5E is angled at beginners and casual players.
+* Character creation
+* Character stat and ability management
+* Spell book management
+* Ability to add your very own custom races, classes and spells
+* Clean, distraction-free interface
 
-## Alternative Apps
+## Staying Simple
 
-For those seeking more comprehensive tools, consider these alternatives:
+Simple 5E will never be a fully featured app in favour of remaining light and intuitive. Besides, there are several
+great 5E apps out there anyway!
 
 * [the DND Beyond Player App](https://www.dndbeyond.com/player-app)
 * [5e Spells (Android)](https://play.google.com/store/apps/details?id=com.dungeondev.a5espells&hl=en-US)
 * [5e Spells (iOS)](https://apps.apple.com/us/app/spells-list-5e/id1220380339)
 
-## Roadmap
-
-Our development plan is divided into short-term and long-term goals to continuously improve Simple 5E.
-
-### Short-Term Goals 🚀
+## Short-Term Goals 🚀
 
 - [ ] Add character notes functionality
 - [ ] Implement custom race image uploads
 - [ ] Enable custom class image uploads
 - [ ] Expand spell list beyond default 5E spells
 
-### Long-Term Vision 🔮
+## Long-Term Vision 🔮
 
 - [ ] Implement multi-device synchronization
 - [ ] Develop a web application version
@@ -50,6 +48,8 @@ Our development plan is divided into short-term and long-term goals to continuou
 - [ ] Enhance in-app theming options
 
 💡 Have a suggestion? Feel free to [open an issue](https://github.com/Simple-5E/Simple-5E/issues/new)!
+
+## Developer Guide
 
 ### Prerequisites
 
