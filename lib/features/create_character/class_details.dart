@@ -18,7 +18,10 @@ class ClassDetails extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(
+            height: 4,
+            width: double.infinity,
+          ),
           Text(value),
         ],
       ),
@@ -71,7 +74,8 @@ class ClassDetails extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 24),
-                Container(
+                Center(
+                    child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.surface,
@@ -99,7 +103,7 @@ class ClassDetails extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
+                )),
               ],
             ),
           ),
