@@ -82,8 +82,9 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
                                   _buildTextField(_levelController, 'Level')),
                           const SizedBox(width: 16),
                           Expanded(
-                              child:
-                                  _buildTextField(_schoolController, 'School')),
+                              child: _buildTextField(
+                                  _schoolController, 'School',
+                                  required: false)),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -91,7 +92,8 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
                         children: [
                           Expanded(
                               child: _buildTextField(
-                                  _castingTimeController, 'Casting Time')),
+                                  _castingTimeController, 'Casting Time',
+                                  required: false)),
                           const SizedBox(width: 16),
                           Expanded(
                               child:
@@ -103,11 +105,13 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
                         children: [
                           Expanded(
                               child: _buildTextField(
-                                  _componentsController, 'Components')),
+                                  _componentsController, 'Components',
+                                  required: false)),
                           const SizedBox(width: 16),
                           Expanded(
                               child: _buildTextField(
-                                  _durationController, 'Duration')),
+                                  _durationController, 'Duration',
+                                  required: false)),
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -116,7 +120,7 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
                       const SizedBox(height: 16),
                       _buildTextField(
                           _additionalNotesController, 'Additional Notes',
-                          maxLines: 3),
+                          maxLines: 3, required: false),
                       const SizedBox(height: 24),
                       Text('Classes',
                           style: Theme.of(context).textTheme.titleMedium),
@@ -139,7 +143,7 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
   }
 
   Widget _buildTextField(TextEditingController controller, String label,
-      {int maxLines = 1}) {
+      {int maxLines = 1, bool required = true}) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -148,7 +152,7 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
       ),
       maxLines: maxLines,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (required && (value == null || value.isEmpty)) {
           return 'Please enter $label';
         }
         return null;
