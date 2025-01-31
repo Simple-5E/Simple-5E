@@ -38,6 +38,11 @@ class SpellRepository {
     ''');
   }
 
+  Future<void> deleteDefaultSpells() async {
+    final db = await database;
+    await db.delete('spells', where: 'isUserDefined = 0');
+  }
+
   Future<void> createSpell(Spell spell) async {
     final db = await database;
     await db.insert('spells', _spellToMap(spell),
@@ -141,7 +146,7 @@ class SpellRepository {
     return {
       'name': spell.name,
       'level': spell.level,
-      'classes': spell.classes.isEmpty ? jsonEncode(spell.classes) : "",
+      'classes': spell.classes.isNotEmpty ? jsonEncode(spell.classes) : "",
       'castingTime': spell.castingTime,
       'range': spell.range,
       'components': spell.components,

@@ -21,6 +21,7 @@ class DatabaseInitializer {
   Future<void> initializeDatabase() async {
     final db = await _characterRepository.database;
     await _createTables(db);
+    await _cleanDefaultData(db);
     await _insertSpellsFromJson();
   }
 
@@ -30,6 +31,10 @@ class DatabaseInitializer {
     await _spellSlotRepository.createSpellSlotTable(db);
     await _classRepository.createTables(db);
     await _raceRepository.createTables(db);
+  }
+
+  Future<void> _cleanDefaultData(Database db) async {
+    await _spellRepository.deleteDefaultSpells();
   }
 
   Future<void> _insertSpellsFromJson() async {
