@@ -78,8 +78,7 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
                       Row(
                         children: [
                           Expanded(
-                              child:
-                                  _buildTextField(_levelController, 'Level')),
+                              child: _buildIntField(_levelController, 'Level')),
                           const SizedBox(width: 16),
                           Expanded(
                               child: _buildTextField(
@@ -154,6 +153,27 @@ class _CustomSpellFormState extends ConsumerState<CustomSpellForm> {
       validator: (value) {
         if (required && (value == null || value.isEmpty)) {
           return 'Please enter $label';
+        }
+        return null;
+      },
+    );
+  }
+
+  Widget _buildIntField(TextEditingController controller, String label,
+      {int maxLines = 1, bool required = true}) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      maxLines: maxLines,
+      validator: (value) {
+        if (required && (value == null || value.isEmpty)) {
+          return 'Please enter $label';
+        }
+        if (required && value != null && int.tryParse(value) == null) {
+          return 'Please enter a valid number';
         }
         return null;
       },
