@@ -114,29 +114,31 @@ class RaceDetails extends ConsumerWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 24),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.outlineVariant,
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Quick Stats',
-                        style: Theme.of(context).textTheme.titleLarge,
+                Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surface,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.outlineVariant,
                       ),
-                      const SizedBox(height: 8),
-                      _buildQuickStat(
-                          'Ability Bonus', race.abilityScoreIncrease),
-                      _buildQuickStat('Speed', race.speed),
-                      _buildQuickStat('Size', race.size),
-                      _buildQuickStat('Languages', race.languages),
-                    ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Quick Stats',
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                        const SizedBox(height: 8),
+                        _buildQuickStat(
+                            'Ability Bonus', race.abilityScoreIncrease),
+                        _buildQuickStat('Speed', race.speed),
+                        _buildQuickStat('Size', race.size),
+                        _buildQuickStat('Languages', race.languages),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
