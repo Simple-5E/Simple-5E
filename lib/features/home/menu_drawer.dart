@@ -110,11 +110,10 @@ class MenuDrawer extends ConsumerWidget {
               children: <Widget>[
                 const Text('A streamlined 5E character management app.'),
                 const SizedBox(height: 20),
-                _buildInfoRow(Icons.person, 'Author: scott-the-programmer'),
-                _buildInfoRow(Icons.web, 'Website: scott.murray.kiwi',
-                    onTap: () => _launchURL('https://scott.murray.kiwi')),
+                _buildInfoRow(Icons.person, 'Author: scott-the-programmer',
+                    onTap: () async => _launchURL('https://scott.murray.kiwi')),
                 _buildInfoRow(Icons.code, 'GitHub: Simple-5E/Simple-5E',
-                    onTap: () => _launchURL(
+                    onTap: () async => _launchURL(
                         'https://github.com/simple-5e/simple-5e.git')),
               ],
             ),
