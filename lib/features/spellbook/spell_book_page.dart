@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simple5e/data/spell_repository.dart';
 import 'package:simple5e/features/spellbook/spell_selection_page.dart';
 import 'package:simple5e/features/spellbook/spell_slot_widget.dart';
 import 'package:simple5e/models/spell.dart';
@@ -37,7 +38,7 @@ class SpellbookPage extends ConsumerWidget {
           error: (err, stack) =>
               Center(child: Text('Error loading spell slots: $err')),
           data: (spellSlots) =>
-              _buildSpellbookContent(context, spells, spellSlots),
+              _buildSpellbookContent(context, ref, spells, spellSlots),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -58,8 +59,8 @@ class SpellbookPage extends ConsumerWidget {
     );
   }
 
-  Widget _buildSpellbookContent(
-      BuildContext context, List<Spell> spells, List<SpellSlot> spellSlots) {
+  Widget _buildSpellbookContent(BuildContext context, WidgetRef ref,
+      List<Spell> spells, List<SpellSlot> spellSlots) {
     final Map<int, List<Spell>> groupedSpells = {};
 
     for (var spell in spells) {
@@ -274,7 +275,13 @@ class SpellbookPage extends ConsumerWidget {
                                   ),
                                   icon: const Icon(Icons.delete_outline),
                                   label: const Text('Remove'),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    await SpellRepository.instance
+                                        .removeSpellFromCharacter(
+                                            characterId, spell.name);
+                                    ref.invalidate(
+                                        characterSpellsProvider(characterId));
+                                  },
                                 ),
                               ),
                             ],
