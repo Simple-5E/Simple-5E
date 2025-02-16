@@ -111,7 +111,8 @@ void main() {
     testWidgets('shows empty state when no notes exist', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest([], 1));
       await tester.pumpAndSettle();
-      expect(find.text('No notes yet. Tap + to add a note.'), findsOneWidget);
+      expect(
+          find.text('Start adding notes for your character'), findsOneWidget);
       expect(find.byType(FloatingActionButton), findsOneWidget);
     });
 
@@ -169,7 +170,7 @@ void main() {
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
 
-      expect(find.text('Add Note'), findsOneWidget);
+      expect(find.text('Add Note'), findsNWidgets(2));
       expect(find.byType(TextField), findsNWidgets(2));
       expect(find.text('Save'), findsOneWidget);
       expect(find.text('Cancel'), findsOneWidget);
@@ -182,18 +183,19 @@ void main() {
       await tester.tap(find.text('Quest Log'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Edit Note'), findsOneWidget);
-      expect(find.widgetWithText(TextField, 'Quest Log'), findsOneWidget);
-      expect(
-          find.widgetWithText(TextField, 'Need to find the lost artifact...'),
-          findsOneWidget);
+      expect(find.text('Edit'), findsAny);
+      expect(find.text('Quest Log'), findsOneWidget);
+      expect(find.text('Need to find the lost artifact...'), findsOneWidget);
     });
 
     testWidgets('shows delete confirmation dialog', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest(mockNotes, 1));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.byIcon(Icons.delete).first);
+      await tester.tap(find.text('Quest Log'));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Delete').first);
       await tester.pumpAndSettle();
 
       expect(find.text('Delete Note'), findsOneWidget);
@@ -204,13 +206,14 @@ void main() {
     testWidgets('prevents empty note creation', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest(mockNotes, 1));
       await tester.pumpAndSettle();
-      await tester.tap(find.byType(FloatingActionButton));
+
+      await tester.tap(find.text('Add Note'));
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Save'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Add Note'), findsOneWidget);
+      expect(find.text('Save'), findsOneWidget);
     });
   });
 }

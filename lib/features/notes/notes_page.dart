@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple5e/models/note.dart';
 import 'package:simple5e/providers/notes_provider.dart';
 import 'package:intl/intl.dart';
+import 'package:expandable/expandable.dart';
 
 class NotesPage extends ConsumerWidget {
   final int characterId;
@@ -14,17 +15,22 @@ class NotesPage extends ConsumerWidget {
     final notesAsync = ref.watch(characterNotesProvider(characterId));
 
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         title: const Text('Character Notes'),
+        centerTitle: true,
+        elevation: 0,
       ),
       body: notesAsync.when(
         data: (notes) => _buildNotesList(context, ref, notes),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showAddNoteDialog(context, ref),
-        child: const Icon(Icons.add),
+        icon: const Icon(Icons.add),
+        label: const Text('Add Note'),
+        elevation: 2,
       ),
     );
   }
@@ -32,37 +38,163 @@ class NotesPage extends ConsumerWidget {
   Widget _buildNotesList(
       BuildContext context, WidgetRef ref, List<Note> notes) {
     if (notes.isEmpty) {
-      return const Center(
-        child: Text('No notes yet. Tap + to add a note.'),
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(32),
+              decoration: BoxDecoration(
+                color: Theme.of(context)
+                    .colorScheme
+                    .secondaryContainer
+                    .withOpacity(0.2),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Icon(
+                Icons.note_add,
+                size: 64,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'No notes yet',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Start adding notes for your character',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ],
+        ),
       );
     }
 
     return ListView.builder(
+      padding: const EdgeInsets.all(16),
       itemCount: notes.length,
       itemBuilder: (context, index) {
         final note = notes[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          child: ListTile(
-            title: Text(note.title),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  note.content,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+        return Container(
+          margin: const EdgeInsets.only(bottom: 16),
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: ExpandableNotifier(
+            child: ScrollOnExpand(
+              child: ExpandablePanel(
+                theme: ExpandableThemeData(
+                  headerAlignment: ExpandablePanelHeaderAlignment.center,
+                  tapBodyToExpand: true,
+                  tapBodyToCollapse: true,
+                  hasIcon: false,
+                  animationDuration: const Duration(milliseconds: 300),
+                  bodyAlignment: ExpandablePanelBodyAlignment.left,
                 ),
-                Text(
-                  'Last updated: ${DateFormat('MMM d, y HH:mm').format(note.updatedAt)}',
-                  style: Theme.of(context).textTheme.bodySmall,
+                header: ListTile(
+                  title: Text(
+                    note.title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  subtitle: Text(
+                    DateFormat('MMM d, y HH:mm').format(note.updatedAt),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  ),
+                  trailing: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 150),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ExpandableButton(
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color:
+                                  Theme.of(context).colorScheme.surfaceVariant,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Icon(
+                              Icons.expand_more,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            onTap: () => _showEditNoteDialog(context, ref, note),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () => _showDeleteConfirmation(context, ref, note),
+                collapsed: const SizedBox(),
+                expanded: Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Divider(height: 24),
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondaryContainer
+                              .withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          note.content,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.onSurface,
+                                height: 1.5,
+                              ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton.icon(
+                            icon: const Icon(Icons.edit_outlined),
+                            label: const Text('Edit'),
+                            onPressed: () =>
+                                _showEditNoteDialog(context, ref, note),
+                          ),
+                          const SizedBox(width: 8),
+                          TextButton.icon(
+                            style: TextButton.styleFrom(
+                              foregroundColor:
+                                  Theme.of(context).colorScheme.error,
+                            ),
+                            icon: const Icon(Icons.delete_outline),
+                            label: const Text('Delete'),
+                            onPressed: () =>
+                                _showDeleteConfirmation(context, ref, note),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         );
@@ -111,6 +243,7 @@ class NotesPage extends ConsumerWidget {
                 );
                 ref.read(notesProvider.notifier).addNote(note);
                 ref.invalidate(notesProvider);
+                ref.invalidate(characterNotesProvider);
                 Navigator.pop(context);
               }
             },
@@ -160,6 +293,8 @@ class NotesPage extends ConsumerWidget {
                   content: contentController.text,
                 );
                 ref.read(notesProvider.notifier).updateNote(updatedNote);
+                ref.invalidate(notesProvider);
+                ref.invalidate(characterNotesProvider);
                 Navigator.pop(context);
               }
             },
@@ -184,6 +319,8 @@ class NotesPage extends ConsumerWidget {
           TextButton(
             onPressed: () {
               ref.read(notesProvider.notifier).deleteNote(note.id!);
+              ref.invalidate(notesProvider);
+              ref.invalidate(characterNotesProvider);
               Navigator.pop(context);
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
