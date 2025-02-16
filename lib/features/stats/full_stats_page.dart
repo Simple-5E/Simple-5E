@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simple5e/features/create_character/classes.dart';
 import 'package:simple5e/features/create_character/race_details.dart';
+import 'package:simple5e/features/notes/notes_page.dart';
 import 'package:simple5e/providers/custom_class_provider.dart';
 import 'package:simple5e/providers/custom_race_provider.dart';
 import '../../models/character.dart';
@@ -32,7 +33,21 @@ class FullStatsPage extends ConsumerWidget {
       BuildContext context, WidgetRef ref, Character character) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Full Stats'),
+        title: const Text('Full Stats'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.note_add),
+            tooltip: 'Character Notes',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NotesPage(characterId: characterId),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(8.0),

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:simple5e/data/class_repository.dart';
+import 'package:simple5e/data/note_repository.dart';
 import 'package:simple5e/data/race_repository.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:simple5e/data/character_repository.dart';
@@ -15,6 +16,7 @@ class DatabaseInitializer {
   final SpellSlotRepository _spellSlotRepository = SpellSlotRepository.instance;
   final ClassRepository _classRepository = ClassRepository.instance;
   final RaceRepository _raceRepository = RaceRepository.instance;
+  final NoteRepository _noteRepository = NoteRepository.instance;
 
   DatabaseInitializer._init();
 
@@ -31,6 +33,7 @@ class DatabaseInitializer {
     await _spellSlotRepository.createSpellSlotTable(db);
     await _classRepository.createTables(db);
     await _raceRepository.createTables(db);
+    await _noteRepository.createNoteTable(db);
   }
 
   Future<void> _cleanDefaultData(Database db) async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simple5e/features/notes/notes_page.dart';
 import 'package:simple5e/features/spellbook/spell_book_page.dart';
 import 'package:simple5e/features/stats/full_stats_page.dart';
 import 'package:simple5e/models/spell.dart';
@@ -200,6 +201,10 @@ class CharacterSheetPage extends ConsumerWidget {
           child: const Text('Spell Book'),
         ),
         ElevatedButton(
+          onPressed: () => _navigateToNotes(context),
+          child: const Text('Notes'),
+        ),
+        ElevatedButton(
           onPressed: () => _navigateToFullStats(context),
           child: const Text('Full Stats'),
         ),
@@ -212,6 +217,17 @@ class CharacterSheetPage extends ConsumerWidget {
       context,
       MaterialPageRoute(
         builder: (context) => SpellbookPage(
+          characterId: characterId,
+        ),
+      ),
+    );
+  }
+
+  void _navigateToNotes(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotesPage(
           characterId: characterId,
         ),
       ),
