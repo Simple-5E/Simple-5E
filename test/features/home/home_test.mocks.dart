@@ -30,12 +30,12 @@ import 'package:sqflite/sqflite.dart' as _i2;
 
 class _FakeDatabase_0 extends _i1.SmartFake implements _i2.Database {
   _FakeDatabase_0(Object parent, Invocation parentInvocation)
-      : super(parent, parentInvocation);
+    : super(parent, parentInvocation);
 }
 
 class _FakeSpellSlot_1 extends _i1.SmartFake implements _i3.SpellSlot {
   _FakeSpellSlot_1(Object parent, Invocation parentInvocation)
-      : super(parent, parentInvocation);
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [CharacterRepository].
@@ -48,61 +48,74 @@ class MockCharacterRepository extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.Database> get database => (super.noSuchMethod(
-        Invocation.getter(#database),
-        returnValue: _i5.Future<_i2.Database>.value(
-          _FakeDatabase_0(this, Invocation.getter(#database)),
-        ),
-      ) as _i5.Future<_i2.Database>);
+  _i5.Future<_i2.Database> get database =>
+      (super.noSuchMethod(
+            Invocation.getter(#database),
+            returnValue: _i5.Future<_i2.Database>.value(
+              _FakeDatabase_0(this, Invocation.getter(#database)),
+            ),
+          )
+          as _i5.Future<_i2.Database>);
 
   @override
   _i5.Future<void> createDB(_i2.Database? db, int? version) =>
       (super.noSuchMethod(
-        Invocation.method(#createDB, [db, version]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#createDB, [db, version]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<void> clearDB() => (super.noSuchMethod(
-        Invocation.method(#clearDB, []),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> clearDB() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearDB, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<int> createCharacter(_i6.Character? character) =>
       (super.noSuchMethod(
-        Invocation.method(#createCharacter, [character]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+            Invocation.method(#createCharacter, [character]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
-  _i5.Future<int> getNextCharacterId() => (super.noSuchMethod(
-        Invocation.method(#getNextCharacterId, []),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+  _i5.Future<int> getNextCharacterId() =>
+      (super.noSuchMethod(
+            Invocation.method(#getNextCharacterId, []),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
-  _i5.Future<_i6.Character?> readCharacter(int? id) => (super.noSuchMethod(
-        Invocation.method(#readCharacter, [id]),
-        returnValue: _i5.Future<_i6.Character?>.value(),
-      ) as _i5.Future<_i6.Character?>);
+  _i5.Future<_i6.Character?> readCharacter(int? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#readCharacter, [id]),
+            returnValue: _i5.Future<_i6.Character?>.value(),
+          )
+          as _i5.Future<_i6.Character?>);
 
   @override
-  _i5.Future<List<_i6.Character>> readAllCharacters() => (super.noSuchMethod(
-        Invocation.method(#readAllCharacters, []),
-        returnValue: _i5.Future<List<_i6.Character>>.value(
-          <_i6.Character>[],
-        ),
-      ) as _i5.Future<List<_i6.Character>>);
+  _i5.Future<List<_i6.Character>> readAllCharacters() =>
+      (super.noSuchMethod(
+            Invocation.method(#readAllCharacters, []),
+            returnValue: _i5.Future<List<_i6.Character>>.value(
+              <_i6.Character>[],
+            ),
+          )
+          as _i5.Future<List<_i6.Character>>);
 
   @override
   _i5.Future<int> updateCharacter(_i6.Character? character) =>
       (super.noSuchMethod(
-        Invocation.method(#updateCharacter, [character]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+            Invocation.method(#updateCharacter, [character]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
   _i5.Future<int> updateCharacterStat<T>(
@@ -111,15 +124,18 @@ class MockCharacterRepository extends _i1.Mock
     T? newValue,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(#updateCharacterStat, [id, statName, newValue]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+            Invocation.method(#updateCharacterStat, [id, statName, newValue]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
-  _i5.Future<int> deleteCharacter(int? id) => (super.noSuchMethod(
-        Invocation.method(#deleteCharacter, [id]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+  _i5.Future<int> deleteCharacter(int? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteCharacter, [id]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 }
 
 /// A class which mocks [SpellRepository].
@@ -131,73 +147,101 @@ class MockSpellRepository extends _i1.Mock implements _i7.SpellRepository {
   }
 
   @override
-  _i5.Future<_i2.Database> get database => (super.noSuchMethod(
-        Invocation.getter(#database),
-        returnValue: _i5.Future<_i2.Database>.value(
-          _FakeDatabase_0(this, Invocation.getter(#database)),
-        ),
-      ) as _i5.Future<_i2.Database>);
+  _i5.Future<_i2.Database> get database =>
+      (super.noSuchMethod(
+            Invocation.getter(#database),
+            returnValue: _i5.Future<_i2.Database>.value(
+              _FakeDatabase_0(this, Invocation.getter(#database)),
+            ),
+          )
+          as _i5.Future<_i2.Database>);
 
   @override
-  _i5.Future<void> createSpellTables(_i2.Database? db) => (super.noSuchMethod(
-        Invocation.method(#createSpellTables, [db]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> createSpellTables(_i2.Database? db) =>
+      (super.noSuchMethod(
+            Invocation.method(#createSpellTables, [db]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<void> createSpell(_i8.Spell? spell) => (super.noSuchMethod(
-        Invocation.method(#createSpell, [spell]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> deleteDefaultSpells() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteDefaultSpells, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<_i8.Spell?> readSpell(String? name) => (super.noSuchMethod(
-        Invocation.method(#readSpell, [name]),
-        returnValue: _i5.Future<_i8.Spell?>.value(),
-      ) as _i5.Future<_i8.Spell?>);
+  _i5.Future<void> createSpell(_i8.Spell? spell) =>
+      (super.noSuchMethod(
+            Invocation.method(#createSpell, [spell]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<void> clearDB() => (super.noSuchMethod(
-        Invocation.method(#clearDB, []),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<_i8.Spell?> readSpell(String? name) =>
+      (super.noSuchMethod(
+            Invocation.method(#readSpell, [name]),
+            returnValue: _i5.Future<_i8.Spell?>.value(),
+          )
+          as _i5.Future<_i8.Spell?>);
 
   @override
-  _i5.Future<List<_i8.Spell>> readAllSpells() => (super.noSuchMethod(
-        Invocation.method(#readAllSpells, []),
-        returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
-      ) as _i5.Future<List<_i8.Spell>>);
+  _i5.Future<void> clearDB() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearDB, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
-  _i5.Future<List<_i8.Spell>> readAllUserDefinedSpells() => (super.noSuchMethod(
-        Invocation.method(#readAllUserDefinedSpells, []),
-        returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
-      ) as _i5.Future<List<_i8.Spell>>);
+  _i5.Future<List<_i8.Spell>> readAllSpells() =>
+      (super.noSuchMethod(
+            Invocation.method(#readAllSpells, []),
+            returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
+          )
+          as _i5.Future<List<_i8.Spell>>);
 
   @override
-  _i5.Future<void> updateSpell(_i8.Spell? spell) => (super.noSuchMethod(
-        Invocation.method(#updateSpell, [spell]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<List<_i8.Spell>> readAllUserDefinedSpells() =>
+      (super.noSuchMethod(
+            Invocation.method(#readAllUserDefinedSpells, []),
+            returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
+          )
+          as _i5.Future<List<_i8.Spell>>);
 
   @override
-  _i5.Future<void> deleteSpell(String? name) => (super.noSuchMethod(
-        Invocation.method(#deleteSpell, [name]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> updateSpell(_i8.Spell? spell) =>
+      (super.noSuchMethod(
+            Invocation.method(#updateSpell, [spell]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
+
+  @override
+  _i5.Future<void> deleteSpell(String? name) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteSpell, [name]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<void> addSpellToCharacter(int? characterId, String? spellName) =>
       (super.noSuchMethod(
-        Invocation.method(#addSpellToCharacter, [characterId, spellName]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#addSpellToCharacter, [characterId, spellName]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<void> removeSpellFromCharacter(
@@ -205,28 +249,31 @@ class MockSpellRepository extends _i1.Mock implements _i7.SpellRepository {
     String? spellName,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(#removeSpellFromCharacter, [
-          characterId,
-          spellName,
-        ]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#removeSpellFromCharacter, [
+              characterId,
+              spellName,
+            ]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<void> clearSpellsForCharacter(int? characterId) =>
       (super.noSuchMethod(
-        Invocation.method(#clearSpellsForCharacter, [characterId]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#clearSpellsForCharacter, [characterId]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<List<_i8.Spell>> readSpellsForCharacter(int? characterId) =>
       (super.noSuchMethod(
-        Invocation.method(#readSpellsForCharacter, [characterId]),
-        returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
-      ) as _i5.Future<List<_i8.Spell>>);
+            Invocation.method(#readSpellsForCharacter, [characterId]),
+            returnValue: _i5.Future<List<_i8.Spell>>.value(<_i8.Spell>[]),
+          )
+          as _i5.Future<List<_i8.Spell>>);
 }
 
 /// A class which mocks [SpellSlotRepository].
@@ -239,81 +286,93 @@ class MockSpellSlotRepository extends _i1.Mock
   }
 
   @override
-  _i5.Future<_i2.Database> get database => (super.noSuchMethod(
-        Invocation.getter(#database),
-        returnValue: _i5.Future<_i2.Database>.value(
-          _FakeDatabase_0(this, Invocation.getter(#database)),
-        ),
-      ) as _i5.Future<_i2.Database>);
+  _i5.Future<_i2.Database> get database =>
+      (super.noSuchMethod(
+            Invocation.getter(#database),
+            returnValue: _i5.Future<_i2.Database>.value(
+              _FakeDatabase_0(this, Invocation.getter(#database)),
+            ),
+          )
+          as _i5.Future<_i2.Database>);
 
   @override
   _i5.Future<void> createSpellSlotTable(_i2.Database? db) =>
       (super.noSuchMethod(
-        Invocation.method(#createSpellSlotTable, [db]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#createSpellSlotTable, [db]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<int> createSpellSlot(_i3.SpellSlot? spellSlot) =>
       (super.noSuchMethod(
-        Invocation.method(#createSpellSlot, [spellSlot]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+            Invocation.method(#createSpellSlot, [spellSlot]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
   _i5.Future<List<_i3.SpellSlot>> readSpellSlotsForCharacter(
     int? characterId,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(#readSpellSlotsForCharacter, [characterId]),
-        returnValue: _i5.Future<List<_i3.SpellSlot>>.value(
-          <_i3.SpellSlot>[],
-        ),
-      ) as _i5.Future<List<_i3.SpellSlot>>);
+            Invocation.method(#readSpellSlotsForCharacter, [characterId]),
+            returnValue: _i5.Future<List<_i3.SpellSlot>>.value(
+              <_i3.SpellSlot>[],
+            ),
+          )
+          as _i5.Future<List<_i3.SpellSlot>>);
 
   @override
-  _i5.Future<void> clearDB() => (super.noSuchMethod(
-        Invocation.method(#clearDB, []),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> clearDB() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearDB, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<_i3.SpellSlot> updateSpellSlot(_i3.SpellSlot? spellSlot) =>
       (super.noSuchMethod(
-        Invocation.method(#updateSpellSlot, [spellSlot]),
-        returnValue: _i5.Future<_i3.SpellSlot>.value(
-          _FakeSpellSlot_1(
-            this,
             Invocation.method(#updateSpellSlot, [spellSlot]),
-          ),
-        ),
-      ) as _i5.Future<_i3.SpellSlot>);
+            returnValue: _i5.Future<_i3.SpellSlot>.value(
+              _FakeSpellSlot_1(
+                this,
+                Invocation.method(#updateSpellSlot, [spellSlot]),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.SpellSlot>);
 
   @override
   _i5.Future<_i3.SpellSlot> readSpellSlot(int? spellSlotId) =>
       (super.noSuchMethod(
-        Invocation.method(#readSpellSlot, [spellSlotId]),
-        returnValue: _i5.Future<_i3.SpellSlot>.value(
-          _FakeSpellSlot_1(
-            this,
             Invocation.method(#readSpellSlot, [spellSlotId]),
-          ),
-        ),
-      ) as _i5.Future<_i3.SpellSlot>);
+            returnValue: _i5.Future<_i3.SpellSlot>.value(
+              _FakeSpellSlot_1(
+                this,
+                Invocation.method(#readSpellSlot, [spellSlotId]),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.SpellSlot>);
 
   @override
-  _i5.Future<int> deleteSpellSlot(int? id) => (super.noSuchMethod(
-        Invocation.method(#deleteSpellSlot, [id]),
-        returnValue: _i5.Future<int>.value(0),
-      ) as _i5.Future<int>);
+  _i5.Future<int> deleteSpellSlot(int? id) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteSpellSlot, [id]),
+            returnValue: _i5.Future<int>.value(0),
+          )
+          as _i5.Future<int>);
 
   @override
   _i5.Future<void> deleteSpellSlotsForCharacter(int? characterId) =>
       (super.noSuchMethod(
-        Invocation.method(#deleteSpellSlotsForCharacter, [characterId]),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#deleteSpellSlotsForCharacter, [characterId]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 }
