@@ -14,6 +14,7 @@ The goal is to provide an intentionally simple, user-friendly experience for pla
   <img src="readme/character.png" width="130" />
   <img src="readme/spell_search.png" width="130" />
   <img src="readme/spellbook.png" width="130" />
+  <img src="readme/notes.png" width="130" />
 </p>
 
 ### Key Features:
@@ -35,7 +36,7 @@ great 5E apps out there anyway!
 
 ## Short-Term Goals 🚀
 
-- [ ] Add character notes functionality
+- [x] Add character notes functionality
 - [ ] Implement custom race image uploads
 - [ ] Enable custom class image uploads
 - [ ] Expand spell list beyond default 5E spells
