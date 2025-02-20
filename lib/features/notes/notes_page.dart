@@ -48,7 +48,7 @@ class NotesPage extends ConsumerWidget {
                 color: Theme.of(context)
                     .colorScheme
                     .secondaryContainer
-                    .withOpacity(0.2),
+                    .withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(100),
               ),
               child: Icon(
@@ -86,7 +86,10 @@ class NotesPage extends ConsumerWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withOpacity(0.05),
+                color: Theme.of(context)
+                    .colorScheme
+                    .shadow
+                    .withValues(alpha: 0.05),
                 blurRadius: 10,
                 offset: const Offset(0, 2),
               ),
@@ -125,8 +128,9 @@ class NotesPage extends ConsumerWidget {
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color:
-                                  Theme.of(context).colorScheme.surfaceVariant,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Icon(
@@ -154,7 +158,7 @@ class NotesPage extends ConsumerWidget {
                           color: Theme.of(context)
                               .colorScheme
                               .secondaryContainer
-                              .withOpacity(0.5),
+                              .withValues(alpha: 0.5),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
