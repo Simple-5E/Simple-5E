@@ -10,7 +10,7 @@ import 'package:simple5e/providers/notes_provider.dart';
 import 'notes_page_test.mocks.dart';
 
 class MockNotesNotifier extends NotesNotifier {
-  MockNotesNotifier(List<Note>? notes) : super(MockNoteRepository()) {
+  MockNotesNotifier(List<Note>? notes) : super() {
     state = AsyncValue.data(notes ?? []);
   }
 
@@ -32,7 +32,7 @@ class MockNotesNotifier extends NotesNotifier {
 }
 
 class MockLoadingNotesNotifier extends NotesNotifier {
-  MockLoadingNotesNotifier() : super(MockNoteRepository()) {
+  MockLoadingNotesNotifier() : super() {
     state = const AsyncValue.loading();
   }
   @override
@@ -52,7 +52,7 @@ class MockLoadingNotesNotifier extends NotesNotifier {
 }
 
 class MockErrorNotesNotifier extends NotesNotifier {
-  MockErrorNotesNotifier() : super(MockNoteRepository()) {
+  MockErrorNotesNotifier() : super() {
     state = AsyncValue.error('Test error', StackTrace.current);
   }
   @override
