@@ -53,3 +53,5 @@ coverage
 
 # used to keep track of interal testers
 testers.txt
+
+.aider*
