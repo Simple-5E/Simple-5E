@@ -15,7 +15,9 @@ import 'home_test.mocks.dart';
 class MockCharactersNotifier extends CharactersNotifier {
   final List<Character> initialCharacters;
 
-  MockCharactersNotifier(List<Character>? characters) : initialCharacters = characters ?? [], super() {
+  MockCharactersNotifier(List<Character>? characters)
+      : initialCharacters = characters ?? [],
+        super() {
     state = AsyncValue.data(initialCharacters);
   }
 
@@ -35,7 +37,8 @@ class MockCharactersNotifier extends CharactersNotifier {
     await CharacterRepository.instance.deleteCharacter(id);
     await SpellRepository.instance.clearSpellsForCharacter(id);
     await SpellSlotRepository.instance.deleteSpellSlotsForCharacter(id);
-    state = AsyncValue.data(initialCharacters.where((c) => c.id != id).toList());
+    state =
+        AsyncValue.data(initialCharacters.where((c) => c.id != id).toList());
   }
 }
 
@@ -219,7 +222,8 @@ void main() {
     testWidgets('deletes character when confirmed', (tester) async {
       when(mockCharacterRepository.deleteCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
-      when(mockSpellSlotRepository.deleteSpellSlotsForCharacter(testCharacter.id))
+      when(mockSpellSlotRepository
+              .deleteSpellSlotsForCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
       when(mockSpellRepository.clearSpellsForCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
@@ -241,12 +245,17 @@ void main() {
       // Verify the character is removed from the UI
       expect(find.text('Mock Character'), findsNothing);
       expect(find.text('No characters yet'), findsOneWidget);
-      expect(find.text('Tap the + button to create your first character!'), findsOneWidget);
+      expect(find.text('Tap the + button to create your first character!'),
+          findsOneWidget);
 
       // Verify repository calls
-      verify(mockCharacterRepository.deleteCharacter(testCharacter.id)).called(1);
-      verify(mockSpellSlotRepository.deleteSpellSlotsForCharacter(testCharacter.id)).called(1);
-      verify(mockSpellRepository.clearSpellsForCharacter(testCharacter.id)).called(1);
+      verify(mockCharacterRepository.deleteCharacter(testCharacter.id))
+          .called(1);
+      verify(mockSpellSlotRepository
+              .deleteSpellSlotsForCharacter(testCharacter.id))
+          .called(1);
+      verify(mockSpellRepository.clearSpellsForCharacter(testCharacter.id))
+          .called(1);
     });
 
     testWidgets('navigates to character sheet on tap', (tester) async {

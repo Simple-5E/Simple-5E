@@ -15,7 +15,7 @@ final charactersProvider =
 
 class CharactersNotifier extends StateNotifier<AsyncValue<List<Character>>> {
   final CharacterRepository _repository = CharacterRepository.instance;
-  
+
   CharactersNotifier() : super(const AsyncValue.loading()) {
     loadCharacters();
   }
@@ -48,7 +48,7 @@ class CharactersNotifier extends StateNotifier<AsyncValue<List<Character>>> {
       state = AsyncValue.error(e, StackTrace.current);
     }
   }
-  
+
   Future<void> deleteCharacter(int id) async {
     try {
       await _repository.deleteCharacter(id);
@@ -138,7 +138,7 @@ final updateSpellSlotProvider =
         (ref, characterId) {
   return (SpellSlot spellSlot) async {
     try {
-      final updatedSlot = 
+      final updatedSlot =
           await SpellSlotRepository.instance.updateSpellSlot(spellSlot);
       ref.invalidate(characterSpellSlotsProvider(characterId));
       return updatedSlot;
@@ -187,7 +187,7 @@ class CharacterCreationNotifier extends StateNotifier<CharacterCreationState> {
   void updateCharacterClass(String characterClass) {
     state = state.copyWith(characterClass: characterClass);
   }
-  
+
   void reset() {
     state = CharacterCreationState();
   }

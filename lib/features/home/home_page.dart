@@ -148,7 +148,9 @@ class HomePage extends ConsumerWidget {
             TextButton(
               child: const Text('Delete'),
               onPressed: () async {
-                ref.read(charactersProvider.notifier).deleteCharacter(character.id);
+                ref
+                    .read(charactersProvider.notifier)
+                    .deleteCharacter(character.id);
                 if (context.mounted) {
                   Navigator.of(context).pop();
                 }

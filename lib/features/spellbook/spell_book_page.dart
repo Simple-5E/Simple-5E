@@ -276,8 +276,8 @@ class SpellbookPage extends ConsumerWidget {
                                   icon: const Icon(Icons.delete_outline),
                                   label: const Text('Remove'),
                                   onPressed: () {
-                                    final removeSpell = ref.read(
-                                        removeSpellProvider(characterId));
+                                    final removeSpell = ref
+                                        .read(removeSpellProvider(characterId));
                                     removeSpell(spell.name);
                                   },
                                 ),

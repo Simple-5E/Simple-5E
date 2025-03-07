@@ -9,7 +9,7 @@ final spellsProvider =
 
 class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
   final SpellRepository _repository = SpellRepository.instance;
-  
+
   SpellsNotifier() : super(const AsyncValue.loading()) {
     loadSpells();
   }
@@ -78,7 +78,7 @@ final userDefinedSpellsProvider =
 
 class UserDefinedSpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
   final SpellRepository _repository = SpellRepository.instance;
-  
+
   UserDefinedSpellsNotifier() : super(const AsyncValue.loading()) {
     loadUserDefinedSpells();
   }

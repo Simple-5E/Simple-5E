@@ -9,7 +9,7 @@ final customRacesProvider =
 
 class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
   final RaceRepository _repository = RaceRepository.instance;
-  
+
   CustomRacesNotifier() : super(const AsyncValue.loading()) {
     loadCustomRaces();
   }

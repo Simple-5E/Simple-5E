@@ -10,7 +10,7 @@ final customClassesProvider = StateNotifierProvider<CustomClassesNotifier,
 class CustomClassesNotifier
     extends StateNotifier<AsyncValue<List<CharacterClass>>> {
   final ClassRepository _repository = ClassRepository.instance;
-  
+
   CustomClassesNotifier() : super(const AsyncValue.loading()) {
     loadCustomClasses();
   }

@@ -23,7 +23,7 @@ class NotesNotifier extends StateNotifier<AsyncValue<List<Note>>> {
   NotesNotifier() : super(const AsyncValue.loading()) {
     loadNotes();
   }
-  
+
   Future<void> loadNotes() async {
     // This is a placeholder since we don't have a method to load all notes
     // In a real implementation, you might want to load all notes for all characters
@@ -57,7 +57,7 @@ class NotesNotifier extends StateNotifier<AsyncValue<List<Note>>> {
       state = AsyncValue.error(e, stack);
     }
   }
-  
+
   Future<void> loadNotesForCharacter(int characterId) async {
     try {
       final notes = await _repository.readNotesForCharacter(characterId);
