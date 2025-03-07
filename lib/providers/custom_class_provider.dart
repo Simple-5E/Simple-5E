@@ -9,6 +9,8 @@ final customClassesProvider = StateNotifierProvider<CustomClassesNotifier,
 
 class CustomClassesNotifier
     extends StateNotifier<AsyncValue<List<CharacterClass>>> {
+  final ClassRepository _repository = ClassRepository.instance;
+  
   CustomClassesNotifier() : super(const AsyncValue.loading()) {
     loadCustomClasses();
   }
@@ -16,7 +18,7 @@ class CustomClassesNotifier
   Future<void> loadCustomClasses() async {
     state = const AsyncValue.loading();
     try {
-      final classes = await ClassRepository.instance.readAllClasses();
+      final classes = await _repository.readAllClasses();
       state = AsyncValue.data(classes);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
@@ -25,8 +27,8 @@ class CustomClassesNotifier
 
   Future<void> addCustomClass(CharacterClass characterClass) async {
     try {
-      await ClassRepository.instance.createClass(characterClass);
-      loadCustomClasses(); // Reload the list after adding
+      await _repository.createClass(characterClass);
+      loadCustomClasses();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -34,8 +36,8 @@ class CustomClassesNotifier
 
   Future<void> updateCustomClass(CharacterClass characterClass) async {
     try {
-      await ClassRepository.instance.updateClass(characterClass);
-      loadCustomClasses(); // Reload the list after updating
+      await _repository.updateClass(characterClass);
+      loadCustomClasses();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -43,8 +45,8 @@ class CustomClassesNotifier
 
   Future<void> deleteCustomClass(String name) async {
     try {
-      await ClassRepository.instance.deleteClass(name);
-      loadCustomClasses(); // Reload the list after deleting
+      await _repository.deleteClass(name);
+      loadCustomClasses();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -52,7 +54,7 @@ class CustomClassesNotifier
 
   Future<CharacterClass?> getCustomClass(String name) async {
     try {
-      return await ClassRepository.instance.readClass(name);
+      return await _repository.readClass(name);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
       return null;
@@ -60,8 +62,12 @@ class CustomClassesNotifier
   }
 }
 
-// Optional: Provider for a single custom class
+// Provider for a single custom class
 final customClassProvider =
     FutureProvider.family<CharacterClass?, String>((ref, name) async {
-  return ClassRepository.instance.readClass(name);
+  try {
+    return await ClassRepository.instance.readClass(name);
+  } catch (e) {
+    throw Exception('Failed to load class: $e');
+  }
 });

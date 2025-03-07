@@ -8,14 +8,16 @@ final customRacesProvider =
 });
 
 class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
+  final RaceRepository _repository = RaceRepository.instance;
+  
   CustomRacesNotifier() : super(const AsyncValue.loading()) {
-    _loadCustomRaces();
+    loadCustomRaces();
   }
 
-  Future<void> _loadCustomRaces() async {
+  Future<void> loadCustomRaces() async {
     state = const AsyncValue.loading();
     try {
-      final races = await RaceRepository.instance.readAllRaces();
+      final races = await _repository.readAllRaces();
       state = AsyncValue.data(races);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
@@ -24,8 +26,8 @@ class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
 
   Future<void> addCustomRace(Race race) async {
     try {
-      await RaceRepository.instance.createRace(race);
-      _loadCustomRaces(); // Reload the list after adding
+      await _repository.createRace(race);
+      loadCustomRaces();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -33,8 +35,8 @@ class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
 
   Future<void> updateCustomRace(Race race) async {
     try {
-      await RaceRepository.instance.updateRace(race);
-      _loadCustomRaces(); // Reload the list after updating
+      await _repository.updateRace(race);
+      loadCustomRaces();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -42,8 +44,8 @@ class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
 
   Future<void> deleteCustomRace(String name) async {
     try {
-      await RaceRepository.instance.deleteRace(name);
-      _loadCustomRaces(); // Reload the list after deleting
+      await _repository.deleteRace(name);
+      loadCustomRaces();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -51,7 +53,7 @@ class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
 
   Future<Race?> getCustomRace(String name) async {
     try {
-      return await RaceRepository.instance.readRace(name);
+      return await _repository.readRace(name);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
       return null;
@@ -59,8 +61,12 @@ class CustomRacesNotifier extends StateNotifier<AsyncValue<List<Race>>> {
   }
 }
 
-// Optional: Provider for a single custom race
+// Provider for a single custom race
 final customRaceProvider =
     FutureProvider.family<Race?, String>((ref, name) async {
-  return RaceRepository.instance.readRace(name);
+  try {
+    return await RaceRepository.instance.readRace(name);
+  } catch (e) {
+    throw Exception('Failed to load race: $e');
+  }
 });

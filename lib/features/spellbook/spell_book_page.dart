@@ -275,12 +275,10 @@ class SpellbookPage extends ConsumerWidget {
                                   ),
                                   icon: const Icon(Icons.delete_outline),
                                   label: const Text('Remove'),
-                                  onPressed: () async {
-                                    await SpellRepository.instance
-                                        .removeSpellFromCharacter(
-                                            characterId, spell.name);
-                                    ref.invalidate(
-                                        characterSpellsProvider(characterId));
+                                  onPressed: () {
+                                    final removeSpell = ref.read(
+                                        removeSpellProvider(characterId));
+                                    removeSpell(spell.name);
                                   },
                                 ),
                               ),

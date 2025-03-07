@@ -8,14 +8,16 @@ final spellsProvider =
 });
 
 class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
+  final SpellRepository _repository = SpellRepository.instance;
+  
   SpellsNotifier() : super(const AsyncValue.loading()) {
-    _loadSpells();
+    loadSpells();
   }
 
-  Future<void> _loadSpells() async {
+  Future<void> loadSpells() async {
     state = const AsyncValue.loading();
     try {
-      final spells = await SpellRepository.instance.readAllSpells();
+      final spells = await _repository.readAllSpells();
       state = AsyncValue.data(spells);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
@@ -24,8 +26,8 @@ class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
 
   Future<void> addSpell(Spell spell) async {
     try {
-      await SpellRepository.instance.createSpell(spell);
-      _loadSpells(); // Reload the list after adding
+      await _repository.createSpell(spell);
+      loadSpells();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -33,8 +35,8 @@ class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
 
   Future<void> updateSpell(Spell spell) async {
     try {
-      await SpellRepository.instance.updateSpell(spell);
-      _loadSpells(); // Reload the list after updating
+      await _repository.updateSpell(spell);
+      loadSpells();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -42,8 +44,8 @@ class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
 
   Future<void> deleteSpell(String name) async {
     try {
-      await SpellRepository.instance.deleteSpell(name);
-      _loadSpells(); // Reload the list after deleting
+      await _repository.deleteSpell(name);
+      loadSpells();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
@@ -51,7 +53,7 @@ class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
 
   Future<Spell?> getSpell(String name) async {
     try {
-      return await SpellRepository.instance.readSpell(name);
+      return await _repository.readSpell(name);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
       return null;
@@ -59,9 +61,13 @@ class SpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
   }
 }
 
-// Optional: Provider for a single spell
+// Provider for a single spell
 final spellProvider = FutureProvider.family<Spell?, String>((ref, name) async {
-  return SpellRepository.instance.readSpell(name);
+  try {
+    return await SpellRepository.instance.readSpell(name);
+  } catch (e) {
+    throw Exception('Failed to load spell: $e');
+  }
 });
 
 final userDefinedSpellsProvider =
@@ -71,14 +77,16 @@ final userDefinedSpellsProvider =
 });
 
 class UserDefinedSpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
+  final SpellRepository _repository = SpellRepository.instance;
+  
   UserDefinedSpellsNotifier() : super(const AsyncValue.loading()) {
-    _loadUserDefinedSpells();
+    loadUserDefinedSpells();
   }
 
-  Future<void> _loadUserDefinedSpells() async {
+  Future<void> loadUserDefinedSpells() async {
     state = const AsyncValue.loading();
     try {
-      final spells = await SpellRepository.instance.readAllUserDefinedSpells();
+      final spells = await _repository.readAllUserDefinedSpells();
       state = AsyncValue.data(spells);
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
@@ -87,20 +95,28 @@ class UserDefinedSpellsNotifier extends StateNotifier<AsyncValue<List<Spell>>> {
 
   Future<void> addSpell(Spell spell) async {
     try {
-      await SpellRepository.instance.createSpell(spell);
-      _loadUserDefinedSpells(); // Reload the list after adding
+      await _repository.createSpell(spell);
+      loadUserDefinedSpells();
     } catch (e) {
       state = AsyncValue.error(e, StackTrace.current);
     }
   }
 
   Future<void> updateSpell(Spell spell) async {
-    await SpellRepository.instance.updateSpell(spell);
-    _loadUserDefinedSpells();
+    try {
+      await _repository.updateSpell(spell);
+      loadUserDefinedSpells();
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 
   Future<void> deleteSpell(String name) async {
-    await SpellRepository.instance.deleteSpell(name);
-    _loadUserDefinedSpells();
+    try {
+      await _repository.deleteSpell(name);
+      loadUserDefinedSpells();
+    } catch (e) {
+      state = AsyncValue.error(e, StackTrace.current);
+    }
   }
 }

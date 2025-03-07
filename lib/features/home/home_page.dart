@@ -148,16 +148,10 @@ class HomePage extends ConsumerWidget {
             TextButton(
               child: const Text('Delete'),
               onPressed: () async {
-                await CharacterRepository.instance
-                    .deleteCharacter(character.id);
-                await SpellSlotRepository.instance
-                    .deleteSpellSlotsForCharacter(character.id);
-                await SpellRepository.instance
-                    .clearSpellsForCharacter(character.id);
+                ref.read(charactersProvider.notifier).deleteCharacter(character.id);
                 if (context.mounted) {
                   Navigator.of(context).pop();
                 }
-                ref.invalidate(charactersProvider);
                 ref.invalidate(currentClassPageProvider);
                 ref.invalidate(currentPageProvider);
               },

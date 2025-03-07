@@ -26,9 +26,9 @@ class SpellSlotWidget extends ConsumerWidget {
           context: context,
           builder: (context) => SpellSlotModal(
             spellSlot: spellSlot,
-            onUpdate: (updatedSlot) async {
-              await SpellSlotRepository.instance.updateSpellSlot(updatedSlot);
-              ref.invalidate(characterSpellSlotsProvider(characterId));
+            onUpdate: (updatedSlot) {
+              final updateSlot = ref.read(updateSpellSlotProvider(characterId));
+              updateSlot(updatedSlot);
             },
           ),
         );
