@@ -93,4 +93,4 @@ Assets were generated via [Replicate](https://replicate.com/) using the recraft-
 
 **Development Process**
 
-This pet project utilized Large Language Models (LLMs) to bootstrap many components and widgets. Claude Sonnet was exclusively used with [Continue.dev](https://www.continue.dev/) to assist in the development process.
+This pet project utilized Large Language Models (LLMs) to bootstrap many components and widgets. Claude Sonnet was exclusively used with [Continue.dev](https://www.continue.dev/) and [Aider](https://aider.chat/) to assist in the development process.
