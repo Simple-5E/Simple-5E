@@ -13,8 +13,10 @@ import 'package:simple5e/data/spell_slot_repository.dart';
 import 'home_test.mocks.dart';
 
 class MockCharactersNotifier extends CharactersNotifier {
-  MockCharactersNotifier(List<Character>? characters) : super() {
-    state = AsyncValue.data(characters ?? []);
+  final List<Character> initialCharacters;
+
+  MockCharactersNotifier(List<Character>? characters) : initialCharacters = characters ?? [], super() {
+    state = AsyncValue.data(initialCharacters);
   }
 
   @override
@@ -26,6 +28,14 @@ class MockCharactersNotifier extends CharactersNotifier {
   Future<void> updateCharacterStat<T>(
       int characterId, String statName, T newValue) {
     return Future.value();
+  }
+
+  @override
+  Future<void> deleteCharacter(int id) async {
+    await CharacterRepository.instance.deleteCharacter(id);
+    await SpellRepository.instance.clearSpellsForCharacter(id);
+    await SpellSlotRepository.instance.deleteSpellSlotsForCharacter(id);
+    state = AsyncValue.data(initialCharacters.where((c) => c.id != id).toList());
   }
 }
 
@@ -207,27 +217,36 @@ void main() {
     });
 
     testWidgets('deletes character when confirmed', (tester) async {
-      when(mockCharacterRepository.deleteCharacter(any))
+      when(mockCharacterRepository.deleteCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
-      when(mockSpellSlotRepository.deleteSpellSlotsForCharacter(any))
+      when(mockSpellSlotRepository.deleteSpellSlotsForCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
-      when(mockSpellRepository.clearSpellsForCharacter(any))
+      when(mockSpellRepository.clearSpellsForCharacter(testCharacter.id))
           .thenAnswer((_) async => 1);
 
       await tester.pumpWidget(createWidgetUnderTest(
         characters: [testCharacter],
       ));
 
+      // Verify initial state
+      expect(find.text('Mock Character'), findsOneWidget);
+      expect(find.text('No characters yet'), findsNothing);
+
+      // Trigger deletion
       await tester.longPress(find.text('Mock Character'));
       await tester.pumpAndSettle();
-
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
 
-      // Use any() matcher for verification to avoid type issues
-      verify(mockCharacterRepository.deleteCharacter(any)).called(1);
-      verify(mockSpellSlotRepository.deleteSpellSlotsForCharacter(any)).called(1);
-      verify(mockSpellRepository.clearSpellsForCharacter(any)).called(1);
+      // Verify the character is removed from the UI
+      expect(find.text('Mock Character'), findsNothing);
+      expect(find.text('No characters yet'), findsOneWidget);
+      expect(find.text('Tap the + button to create your first character!'), findsOneWidget);
+
+      // Verify repository calls
+      verify(mockCharacterRepository.deleteCharacter(testCharacter.id)).called(1);
+      verify(mockSpellSlotRepository.deleteSpellSlotsForCharacter(testCharacter.id)).called(1);
+      verify(mockSpellRepository.clearSpellsForCharacter(testCharacter.id)).called(1);
     });
 
     testWidgets('navigates to character sheet on tap', (tester) async {
