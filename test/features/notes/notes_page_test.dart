@@ -7,8 +7,6 @@ import 'package:simple5e/features/notes/notes_page.dart';
 import 'package:simple5e/models/note.dart';
 import 'package:simple5e/providers/notes_provider.dart';
 
-import 'notes_page_test.mocks.dart';
-
 class MockNotesNotifier extends NotesNotifier {
   MockNotesNotifier(List<Note>? notes) : super() {
     state = AsyncValue.data(notes ?? []);

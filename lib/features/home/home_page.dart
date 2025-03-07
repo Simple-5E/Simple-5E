@@ -6,9 +6,6 @@ import 'package:simple5e/features/home/character_sheet_page.dart';
 import 'package:simple5e/features/home/menu_drawer.dart';
 import 'package:simple5e/models/character.dart';
 import 'package:simple5e/providers/providers.dart';
-import 'package:simple5e/data/character_repository.dart';
-import 'package:simple5e/data/spell_repository.dart';
-import 'package:simple5e/data/spell_slot_repository.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
