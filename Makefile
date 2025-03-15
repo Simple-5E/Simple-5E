@@ -17,7 +17,7 @@ all: clean install-deps build test
 .PHONY: install-deps upgrade-deps mocks icons setup-device
 install-deps:
 	@echo "📦 Installing dependencies..."
-	@flutter pub get
+	@flutter pub get --enforce-lockfile
 
 upgrade-deps:
 	@echo "⬆️  Upgrading dependencies..."
