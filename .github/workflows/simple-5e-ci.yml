@@ -75,3 +75,10 @@ jobs:
           track: alpha
           status: draft
           releaseName: ${{ github.ref_name }}
+
+      - name: Create GitHub Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/apk/debug/app-debug.apk
+          generate_release_notes: true
