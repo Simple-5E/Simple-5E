@@ -51,7 +51,6 @@ jobs:
           git describe --tags --dirty
 
       - name: Build Android Debug
-        if: github.ref_type != 'tag'
         run: make build-android-debug
 
       - name: Build Android Release
