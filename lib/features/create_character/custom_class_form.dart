@@ -11,8 +11,8 @@ class CustomClassForm extends ConsumerWidget {
     final formKey = GlobalKey<FormState>();
     final nameController = TextEditingController();
     final descriptionController = TextEditingController();
-    final hitDieController = TextEditingController(text: "d8");
-    final spellcastingController = TextEditingController(text: "None");
+    final hitDieController = TextEditingController(text: 'd8');
+    final spellcastingController = TextEditingController(text: 'None');
     final proficienciesController = TextEditingController();
 
     Widget buildSection(

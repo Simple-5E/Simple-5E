@@ -63,7 +63,7 @@ class SpellbookPage extends ConsumerWidget {
     final Map<int, List<Spell>> groupedSpells = {};
 
     for (var spell in spells) {
-      final spellLevel = spell.level.toLowerCase().contains("cantrip")
+      final spellLevel = spell.level.toLowerCase().contains('cantrip')
           ? 0
           : int.parse(spell.level.replaceAll(RegExp(r'[^\d]'), ''));
       if (!groupedSpells.containsKey(spellLevel)) {

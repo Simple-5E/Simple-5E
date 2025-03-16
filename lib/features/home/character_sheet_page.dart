@@ -64,6 +64,7 @@ class CharacterSheetPage extends ConsumerWidget {
 
   Widget _buildHeroImage(Character character) {
     return Hero(
+      // ignore: prefer_single_quotes
       tag: "character-${character.id}",
       child: AspectRatio(
         aspectRatio: 1920 / 1300,

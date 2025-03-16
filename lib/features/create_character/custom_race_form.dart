@@ -13,11 +13,11 @@ class CustomRaceForm extends ConsumerWidget {
     final formKey = GlobalKey<FormState>();
     final nameController = TextEditingController();
     final descriptionController = TextEditingController();
-    final speedController = TextEditingController(text: "30 feet");
-    final sizeController = TextEditingController(text: "Medium");
-    final languagesController = TextEditingController(text: "Common");
-    final ageController = TextEditingController(text: "20");
-    final alignmentController = TextEditingController(text: "Neutral");
+    final speedController = TextEditingController(text: '30 feet');
+    final sizeController = TextEditingController(text: 'Medium');
+    final languagesController = TextEditingController(text: 'Common');
+    final ageController = TextEditingController(text: '20');
+    final alignmentController = TextEditingController(text: 'Neutral');
     final abilityNameController = TextEditingController();
     final abilityDescriptionController = TextEditingController();
     final abilities = ref.watch(abilitiesProvider);
@@ -234,7 +234,7 @@ class CustomRaceForm extends ConsumerWidget {
               final customRace = Race(
                 name: nameController.text,
                 description: descriptionController.text,
-                abilityScoreIncrease: "",
+                abilityScoreIncrease: '',
                 speed: speedController.text,
                 size: sizeController.text,
                 languages: languagesController.text,

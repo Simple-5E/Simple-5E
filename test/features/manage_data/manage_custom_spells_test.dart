@@ -65,7 +65,7 @@ void main() {
     duration: 'Instantaneous',
     description: 'Test spell description',
     additionalNotes: 'Test additional notes',
-    classes: ["Warlock"],
+    classes: ['Warlock'],
   );
 
   void setScreenSize(WidgetTester tester,

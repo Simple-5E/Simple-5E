@@ -146,7 +146,7 @@ class SpellRepository {
     return {
       'name': spell.name,
       'level': spell.level,
-      'classes': spell.classes.isNotEmpty ? jsonEncode(spell.classes) : "",
+      'classes': spell.classes.isNotEmpty ? jsonEncode(spell.classes) : '',
       'castingTime': spell.castingTime,
       'range': spell.range,
       'components': spell.components,
