@@ -4,6 +4,7 @@
 
 Simple 5E is a simple and intuitive 5E compatible character tracker. Keep track of your characters, abilities and spells across your adventures!
 
+Available now on [Google Play](https://play.google.com/store/apps/details?id=com.murraydev.simple5e)
 
 ## Overview
 
