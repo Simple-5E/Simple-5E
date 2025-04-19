@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: any
-  shared_preferences: any
+  shared_preferences: 2.5.3
   animations: ^2.0.1 
   introduction_screen: ^3.1.14
   expandable: ^5.0.1
