@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Common Development Commands
 
-This is a Flutter app for D&D 5E character management. Use the Makefile for most operations:
+This is a Flutter app for 5E compatible character management. Use the Makefile for most operations:
 
 - `make` or `make all` - Clean, install dependencies, build, and test
 - `make install-deps` - Install Flutter dependencies
@@ -37,7 +37,7 @@ For single test files: `flutter test test/path/to/test_file.dart`
 - `manage_data/` - Custom content creation (races, classes, spells)
 
 **Models**: Immutable data classes in `lib/models/`
-- Core D&D entities: Character, Race, CharacterClass, Spell, SpellSlot, Note
+- Core 5E compatible entities: Character, Race, CharacterClass, Spell, SpellSlot, Note
 - JSON serialization for asset-loaded data
 
 **Providers**: Riverpod providers in `lib/providers/`
