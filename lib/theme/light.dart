@@ -28,7 +28,7 @@ final light = ThemeData(
     surfaceContainerHighest: Color(0xFFE1E9F0), // Light Blue Grey
     onSurfaceVariant: Color(0xFF3A5068), // Medium Blue
   ),
-  cardTheme: CardTheme(
+  cardTheme: CardThemeData(
     color: Colors.white,
     elevation: 2,
     shape: RoundedRectangleBorder(
