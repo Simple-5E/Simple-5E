@@ -24,6 +24,7 @@ class MyApp extends ConsumerWidget {
       title: 'Simple 5e',
       theme: light,
       darkTheme: dark,
+      themeAnimationDuration: const Duration(milliseconds: 200),
       home: FutureBuilder(
         future: DatabaseInitializer.instance.initializeDatabase(),
         builder: (context, snapshot) {

@@ -26,11 +26,10 @@ class NotesPage extends ConsumerWidget {
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddNoteDialog(context, ref),
-        icon: const Icon(Icons.add),
-        label: const Text('Add Note'),
         elevation: 2,
+        child: const Icon(Icons.add),
       ),
     );
   }

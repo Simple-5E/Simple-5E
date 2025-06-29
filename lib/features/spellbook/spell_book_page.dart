@@ -40,11 +40,10 @@ class SpellbookPage extends ConsumerWidget {
               _buildSpellbookContent(context, ref, spells, spellSlots),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToSpellSelection(context),
-        icon: const Icon(Icons.add),
-        label: const Text('Add Spell'),
         elevation: 2,
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -2,81 +2,78 @@ import 'package:flutter/material.dart';
 
 final light = ThemeData(
   useMaterial3: true,
-  brightness: Brightness.light,
-  primaryColor: const Color(0x001E3C54), // Deep Blue
-  hintColor: const Color(0xFF6D7F8F), // Muted Blue Grey
-  scaffoldBackgroundColor: const Color(0xFFF0F4F8), // Very Light Blue Grey
-  fontFamily: 'Roboto',
-  textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: Color(0xFF1F3751)), // Deep Blue
-    bodyMedium: TextStyle(color: Color(0xFF3A5068)), // Medium Blue
-  ),
-  colorScheme: const ColorScheme(
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color(0xFF1F3751),
     brightness: Brightness.light,
-    primary: Color(0xFF1F3751), // Deep Blue
+  ).copyWith(
     onPrimary: Colors.white,
-    primaryContainer: Color(0xFFD0E4FF), // Light Blue
-    onPrimaryContainer: Color(0xFF0D1C2A), // Very Dark Blue
-    secondary: Color(0xFF4A6572), // Blue Grey
-    onSecondary: Colors.white,
-    secondaryContainer: Color(0xFFCDE5FF), // Very Light Blue
-    onSecondaryContainer: Color(0xFF0D1C2A), // Very Dark Blue
-    error: Color(0xFFBA1A1A), // Red
-    onError: Colors.white,
-    surface: Colors.white,
-    onSurface: Color(0xFF1F3751), // Deep Blue
-    surfaceContainerHighest: Color(0xFFE1E9F0), // Light Blue Grey
-    onSurfaceVariant: Color(0xFF3A5068), // Medium Blue
   ),
-  cardTheme: CardThemeData(
-    color: Colors.white,
-    elevation: 2,
+  cardTheme: const CardThemeData(
+    elevation: 1,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
-    shadowColor: const Color(0xFF1F3751).withValues(alpha: 0.1),
   ),
   appBarTheme: const AppBarTheme(
-    color: Color(0xFF1F3751), // Deep Blue
+    backgroundColor: Color(0xFF1F3751),
+    foregroundColor: Colors.white,
+    centerTitle: false,
     elevation: 0,
+    scrolledUnderElevation: 3,
+    surfaceTintColor: Color(0xFF1F3751),
     iconTheme: IconThemeData(color: Colors.white),
     titleTextStyle: TextStyle(
       color: Colors.white,
       fontSize: 20,
-      fontWeight: FontWeight.bold,
+      fontWeight: FontWeight.w500,
     ),
   ),
-  inputDecorationTheme: InputDecorationTheme(
+  inputDecorationTheme: const InputDecorationTheme(
     filled: true,
-    fillColor: Colors.white,
-    hintStyle: TextStyle(color: Color(0xFF6D7F8F)),
-    labelStyle: TextStyle(color: Color(0xFF1F3751)),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Color(0xFFB0BEC5)),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Color(0xFF1F3751), width: 2),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: BorderSide(color: Color(0xFFB0BEC5)),
+      borderRadius: BorderRadius.all(Radius.circular(12)),
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xFF1F3751),
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      elevation: 2,
+      elevation: 1,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+    ).copyWith(
+      backgroundColor: WidgetStateProperty.resolveWith((states) {
+        return ColorScheme.fromSeed(
+          seedColor: const Color(0xFF1F3751),
+          brightness: Brightness.light,
+        ).primary;
+      }),
+      foregroundColor: WidgetStateProperty.resolveWith((states) {
+        return ColorScheme.fromSeed(
+          seedColor: const Color(0xFF1F3751),
+          brightness: Brightness.light,
+        ).onPrimary;
+      }),
     ),
   ),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFF4A6572),
-    foregroundColor: Colors.white,
-    elevation: 4,
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(20)),
+      ),
+    ),
+  ),
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    elevation: 3,
+    focusElevation: 6,
+    hoverElevation: 4,
+    highlightElevation: 6,
+    shape: CircleBorder(),
   ),
 );
