@@ -14,7 +14,7 @@ IOS_BUNDLE_NAME = $(APP_NAME)-$(BUILD_NUMBER).ipa
 all: clean install-deps build test
 
 # Development setup
-.PHONY: install-deps upgrade-deps mocks icons setup-device
+.PHONY: install-deps upgrade-deps generate-pubspec-lock mocks icons setup-device
 install-deps:
 	@echo "📦 Installing dependencies..."
 	@flutter pub get --enforce-lockfile
@@ -22,6 +22,12 @@ install-deps:
 upgrade-deps:
 	@echo "⬆️  Upgrading dependencies..."
 	@flutter pub upgrade
+
+generate-pubspec-lock:
+	@echo "🔒 Generating fresh pubspec.lock..."
+	@docker build -f Dockerfile.pubspec -t simple5e-pubspec-gen .
+	@docker run --rm -v $(PWD):/output simple5e-pubspec-gen sh -c "cp pubspec.lock /output/"
+	@echo "✅ Fresh pubspec.lock generated"
 
 mocks:
 	@echo "🤖 Generating mocks..."
@@ -158,6 +164,7 @@ help:
 	@echo "Development:"
 	@echo "  install-deps         - Install dependencies"
 	@echo "  upgrade-deps         - Upgrade dependencies"
+	@echo "  generate-pubspec-lock - Generate fresh pubspec.lock using Docker"
 	@echo "  mocks               - Generate mocks"
 	@echo "  icons               - Generate app icons"
 	@echo "Quality:"
