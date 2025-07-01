@@ -1,0 +1,11 @@
+FROM instrumentisto/flutter:3.19.6
+
+WORKDIR /app
+
+COPY pubspec.yaml pubspec.lock* ./
+
+RUN flutter pub get
+
+COPY . .
+
+RUN rm -f pubspec.lock && flutter pub get
