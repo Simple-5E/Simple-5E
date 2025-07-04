@@ -22,7 +22,7 @@ class HomePage extends ConsumerWidget {
       body: _buildCharacterList(charactersAsyncValue, context, ref),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToRaceSelection(context, ref),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
@@ -135,7 +135,7 @@ class HomePage extends ConsumerWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Delete ${character.name}?'),
-          content: Text(
+          content: const Text(
               'Are you sure you want to delete this character? This action cannot be undone.'),
           actions: <Widget>[
             TextButton(

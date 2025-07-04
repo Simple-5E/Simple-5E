@@ -125,7 +125,7 @@ class ManageCustomRacesPage extends ConsumerWidget {
   void _addNewRace(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Scaffold(body: CustomRaceForm()),
+        builder: (context) => const Scaffold(body: CustomRaceForm()),
       ),
     );
   }

@@ -114,7 +114,7 @@ class ManageCustomClassesPage extends ConsumerWidget {
   void _addClass(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Scaffold(body: CustomClassForm()),
+        builder: (context) => const Scaffold(body: CustomClassForm()),
       ),
     );
   }

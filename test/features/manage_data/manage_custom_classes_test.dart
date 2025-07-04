@@ -12,7 +12,7 @@ class MockCustomClassNotifier extends CustomClassesNotifier {
 
   @override
   Future<void> deleteCustomClass(String className) async {
-    state = AsyncValue.data([]);
+    state = const AsyncValue.data([]);
     return Future.value();
   }
 

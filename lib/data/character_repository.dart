@@ -112,7 +112,7 @@ class CharacterRepository {
 
   Future<List<Character>> readAllCharacters() async {
     final db = await database;
-    final orderBy = 'name ASC';
+    const orderBy = 'name ASC';
     final result = await db.query('characters', orderBy: orderBy);
 
     return result.map((map) => _mapToCharacter(map)).toList();

@@ -168,13 +168,13 @@ class SpellbookPage extends ConsumerWidget {
                   child: ExpandableNotifier(
                     child: ScrollOnExpand(
                       child: ExpandablePanel(
-                        theme: ExpandableThemeData(
+                        theme: const ExpandableThemeData(
                           headerAlignment:
                               ExpandablePanelHeaderAlignment.center,
                           tapBodyToExpand: true,
                           tapBodyToCollapse: true,
                           hasIcon: false,
-                          animationDuration: const Duration(milliseconds: 300),
+                          animationDuration: Duration(milliseconds: 300),
                           bodyAlignment: ExpandablePanelBodyAlignment.left,
                         ),
                         header: ListTile(

@@ -340,9 +340,9 @@ class FullStatsPage extends ConsumerWidget {
       context: ref.context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Edit Hit Dice'),
+          title: const Text('Edit Hit Dice'),
           content: TextField(
-            decoration: InputDecoration(hintText: 'e.g., 1d8, 2d6'),
+            decoration: const InputDecoration(hintText: 'e.g., 1d8, 2d6'),
             controller: TextEditingController(text: currentValue),
             onChanged: (value) {
               newValue = value;

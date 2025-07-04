@@ -47,34 +47,34 @@ final dark = ThemeData(
   ),
   inputDecorationTheme: InputDecorationTheme(
     filled: true,
-    fillColor: Color(0xFF2C2C2C), // Slightly Lighter Dark Gray
-    hintStyle: TextStyle(color: Color(0xFF9E9E9E)),
-    labelStyle: TextStyle(color: Color(0xFF3F51B5)), // Indigo
+    fillColor: const Color(0xFF2C2C2C), // Slightly Lighter Dark Gray
+    hintStyle: const TextStyle(color: Color(0xFF9E9E9E)),
+    labelStyle: const TextStyle(color: Color(0xFF3F51B5)), // Indigo
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFF424242)),
+      borderSide: const BorderSide(color: Color(0xFF424242)),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFF3F51B5), width: 2), // Indigo
+      borderSide: const BorderSide(color: Color(0xFF3F51B5), width: 2), // Indigo
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFF424242)),
+      borderSide: const BorderSide(color: Color(0xFF424242)),
     ),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Color(0xFF3F51B5), // Indigo
-      foregroundColor: Color(0xFFFFFFFF), // White
+      backgroundColor: const Color(0xFF3F51B5), // Indigo
+      foregroundColor: const Color(0xFFFFFFFF), // White
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       elevation: 2,
     ),
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: Color(0xFF00796B), // Dark Teal
-    foregroundColor: Color(0xFFFFFFFF), // White
+    backgroundColor: const Color(0xFF00796B), // Dark Teal
+    foregroundColor: const Color(0xFFFFFFFF), // White
     elevation: 4,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   ),

@@ -14,7 +14,7 @@ class MockNotesNotifier extends NotesNotifier {
 
   @override
   Future<void> deleteNote(int noteId) async {
-    state = AsyncValue.data([]);
+    state = const AsyncValue.data([]);
     return Future.value();
   }
 
@@ -168,7 +168,7 @@ void main() {
       await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
 
-      expect(find.text('Add Note'), findsNWidgets(2));
+      expect(find.text('Add Note'), findsOneWidget);
       expect(find.byType(TextField), findsNWidgets(2));
       expect(find.text('Save'), findsOneWidget);
       expect(find.text('Cancel'), findsOneWidget);
@@ -205,7 +205,7 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(mockNotes, 1));
       await tester.pumpAndSettle();
 
-      await tester.tap(find.text('Add Note'));
+      await tester.tap(find.byType(FloatingActionButton));
       await tester.pumpAndSettle();
 
       await tester.tap(find.text('Save'));

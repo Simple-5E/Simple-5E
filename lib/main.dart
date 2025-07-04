@@ -29,7 +29,7 @@ class MyApp extends ConsumerWidget {
         future: DatabaseInitializer.instance.initializeDatabase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return HomePage();
+            return const HomePage();
           } else {
             return const SplashScreen();
           }

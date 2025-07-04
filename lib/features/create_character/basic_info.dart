@@ -12,7 +12,7 @@ class BasicInfoPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Character', style: TextStyle(fontSize: 18)),
+        title: const Text('Create Character', style: TextStyle(fontSize: 18)),
         centerTitle: true,
         elevation: 0,
       ),
@@ -23,17 +23,17 @@ class BasicInfoPage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'And what should we call you...',
                 style: TextStyle(fontSize: 18),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               _buildTextField(
                 label: 'Character Name',
                 value: creationState.name,
                 onChanged: creationNotifier.updateName,
               ),
-              SizedBox(height: 48),
+              const SizedBox(height: 48),
               ElevatedButton(
                 onPressed: () {
                   if (creationState.name.isNotEmpty) {
@@ -42,13 +42,13 @@ class BasicInfoPage extends ConsumerWidget {
                         context, '/next_page'); // Replace with actual route
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Please fill in your name')),
+                      const SnackBar(content: Text('Please fill in your name')),
                     );
                   }
                 },
-                child: Padding(
+                child: const Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                   child: Text('Next', style: TextStyle(fontSize: 16)),
                 ),
               ),

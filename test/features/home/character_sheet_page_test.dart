@@ -15,7 +15,7 @@ void main() {
     await tester.pumpWidget(
       UncontrolledProviderScope(
         container: container,
-        child: MaterialApp(
+        child: const MaterialApp(
           home: CharacterSheetPage(characterId: 0),
         ),
       ),
@@ -98,7 +98,7 @@ void main() {
     container = ProviderContainer(
       overrides: [
         characterProvider.overrideWith(
-            (ref, id) => AsyncValue.error('Error', StackTrace.empty)),
+            (ref, id) => const AsyncValue.error('Error', StackTrace.empty)),
         characterSpellsProvider
             .overrideWith((ref, id) => Future.value(<Spell>[])),
       ],
