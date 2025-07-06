@@ -148,7 +148,7 @@ docs:
 .PHONY: local-ci act-debug
 local-ci:
 	@echo "🔄 Running CI checks locally..."
-	@act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest -j build-and-test
+	@act --container-architecture linux/amd64 -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest -j build-and-test
 
 act-debug:
 	@act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:full-latest -j build-and-test \

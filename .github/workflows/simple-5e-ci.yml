@@ -20,13 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Grant hostedtoolcache permissions
-        run: sudo chown -R $(whoami) /opt/hostedtoolcache
-      
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: flutter-actions/setup-flutter@v1
         with:
-          flutter-version: '3.19.6'
+          version: '3.19.6'
           
       - name: Set Up Java
         uses: actions/setup-java@v3.12.0
