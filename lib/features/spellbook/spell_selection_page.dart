@@ -161,7 +161,7 @@ class _SpellSelectionPageState extends ConsumerState<SpellSelectionPage> {
                       color: Theme.of(context)
                           .colorScheme
                           .secondaryContainer
-                          .withValues(alpha: 0.3),
+                          .withAlpha(77),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Column(

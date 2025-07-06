@@ -32,7 +32,7 @@ class RacePortrait extends StatelessWidget {
           );
         } else {
           return Container(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.7),
+            color: Theme.of(context).primaryColor.withAlpha(178),
             child: const Center(
               child: Icon(
                 Icons.question_mark,

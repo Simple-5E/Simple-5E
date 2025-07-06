@@ -5,7 +5,7 @@ PODS:
   - shared_preferences_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
-  - sqflite_darwin (0.0.4):
+  - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
   - url_launcher_ios (0.0.1):
@@ -15,7 +15,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
+  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 EXTERNAL SOURCES:
@@ -25,8 +25,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
-  sqflite_darwin:
-    :path: ".symlinks/plugins/sqflite_darwin/darwin"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -34,7 +34,7 @@ SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   flutter_keyboard_visibility: 4625131e43015dbbe759d9b20daaf77e0e3f6619
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
-  sqflite_darwin: 20b2a3a3b70e43edae938624ce550a3cbf66a3d0
+  sqflite: c35dad70033b8862124f8337cc994a809fcd9fa3
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 
 PODFILE CHECKSUM: 4f1c12611da7338d21589c0b2ecd6bd20b109694

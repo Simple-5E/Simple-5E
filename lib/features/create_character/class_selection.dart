@@ -83,7 +83,7 @@ class ClassSelection extends ConsumerWidget {
                                         Theme.of(context).primaryColor,
                                         Theme.of(context)
                                             .primaryColor
-                                            .withValues(alpha: 0.7),
+                                            .withAlpha(178),
                                       ],
                                     ),
                                   ),
@@ -153,6 +153,7 @@ class ClassSelection extends ConsumerWidget {
                                       );
                                     }
                                   },
+                                  icon: const Icon(Icons.add),
                                   label: const Text('Create Custom Class'),
                                   style: ElevatedButton.styleFrom(
                                     padding: const EdgeInsets.all(16),

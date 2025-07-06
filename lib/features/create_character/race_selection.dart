@@ -110,7 +110,7 @@ class RaceSelection extends ConsumerWidget {
                                           Theme.of(context).primaryColor,
                                           Theme.of(context)
                                               .primaryColor
-                                              .withValues(alpha: 0.7),
+                                              .withAlpha(178),
                                         ],
                                       ),
                                     ),
@@ -182,6 +182,7 @@ class RaceSelection extends ConsumerWidget {
                                         );
                                       }
                                     },
+                                    icon: const Icon(Icons.add),
                                     label: const Text(
                                       'Create Custom Race',
                                       textAlign: TextAlign.center,

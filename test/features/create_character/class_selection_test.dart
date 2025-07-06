@@ -152,7 +152,7 @@ void main() {
       await tester.pumpAndSettle();
     }
 
-    await tester.tap(find.byType(ElevatedButton));
+    await tester.tap(find.text('Create Custom Class').last);
     await tester.pumpAndSettle();
 
     expect(find.byType(CustomClassForm), findsOneWidget);

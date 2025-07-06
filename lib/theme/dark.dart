@@ -25,7 +25,6 @@ final dark = ThemeData(
     onError: Color(0xFF000000), // Very Light Gray
     surface: Color(0xFF1E1E1E), // Dark Gray
     onSurface: Color(0xFFE0E0E0), // Very Light Gray
-    surfaceContainerHighest: Color(0xFF2C2C2C), // Slightly Lighter Dark Gray
     onSurfaceVariant: Color(0xFFBDBDBD), // Light Gray
   ),
   cardTheme: CardThemeData(
