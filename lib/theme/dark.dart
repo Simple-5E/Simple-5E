@@ -26,8 +26,10 @@ final dark = ThemeData(
     surface: Color(0xFF1E1E1E), // Dark Gray
     onSurface: Color(0xFFE0E0E0), // Very Light Gray
     onSurfaceVariant: Color(0xFFBDBDBD), // Light Gray
+    background: Color(0xFF121212),
+    onBackground: Color(0xFFE0E0E0),
   ),
-  cardTheme: CardThemeData(
+  cardTheme: CardTheme(
       color: const Color(0xFF1E1E1E), // Dark Gray
       elevation: 2,
       shape: RoundedRectangleBorder(

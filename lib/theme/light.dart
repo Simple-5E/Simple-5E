@@ -8,7 +8,7 @@ final light = ThemeData(
   ).copyWith(
     onPrimary: Colors.white,
   ),
-  cardTheme: const CardThemeData(
+  cardTheme: const CardTheme(
     elevation: 1,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -41,13 +41,13 @@ final light = ThemeData(
         borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
     ).copyWith(
-      backgroundColor: WidgetStateProperty.resolveWith((states) {
+      backgroundColor: MaterialStateProperty.resolveWith((states) {
         return ColorScheme.fromSeed(
           seedColor: const Color(0xFF1F3751),
           brightness: Brightness.light,
         ).primary;
       }),
-      foregroundColor: WidgetStateProperty.resolveWith((states) {
+      foregroundColor: MaterialStateProperty.resolveWith((states) {
         return ColorScheme.fromSeed(
           seedColor: const Color(0xFF1F3751),
           brightness: Brightness.light,
