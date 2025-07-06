@@ -56,7 +56,8 @@ final dark = ThemeData(
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: const BorderSide(color: Color(0xFF3F51B5), width: 2), // Indigo
+      borderSide:
+          const BorderSide(color: Color(0xFF3F51B5), width: 2), // Indigo
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),

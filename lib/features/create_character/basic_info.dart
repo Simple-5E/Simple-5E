@@ -47,8 +47,7 @@ class BasicInfoPage extends ConsumerWidget {
                   }
                 },
                 child: const Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                  padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                   child: Text('Next', style: TextStyle(fontSize: 16)),
                 ),
               ),
