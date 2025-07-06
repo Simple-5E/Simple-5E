@@ -19,7 +19,7 @@ class MenuDrawer extends ConsumerWidget {
               children: [
                 DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
+                    color: Theme.of(context).appBarTheme.backgroundColor,
                   ),
                   child: Center(
                     child: Image.asset(
