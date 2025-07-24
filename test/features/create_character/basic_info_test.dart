@@ -12,7 +12,7 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: const MaterialApp(
-          home: BasicInfoPage(),
+          home: Scaffold(body: BasicInfoPage()),
         ),
       ),
     );

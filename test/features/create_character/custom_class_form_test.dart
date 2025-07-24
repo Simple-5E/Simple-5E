@@ -23,7 +23,7 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: const MaterialApp(
-          home: CustomClassForm(),
+          home: Scaffold(body: CustomClassForm()),
         ),
       ),
     );

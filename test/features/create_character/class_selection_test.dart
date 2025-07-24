@@ -62,7 +62,7 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-          home: ClassSelection(selectedRace: mockRace),
+          home: Scaffold(body: ClassSelection(selectedRace: mockRace)),
         ),
       ),
     );
@@ -185,7 +185,7 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-          home: ClassSelection(selectedRace: mockRace),
+          home: Scaffold(body: ClassSelection(selectedRace: mockRace)),
         ),
       ),
     );

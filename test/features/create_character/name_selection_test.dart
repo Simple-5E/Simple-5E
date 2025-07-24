@@ -60,9 +60,11 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: MaterialApp(
-          home: NameSelection(
-            selectedRace: mockRace,
-            selectedClass: mockClass,
+          home: Scaffold(
+            body: NameSelection(
+              selectedRace: mockRace,
+              selectedClass: mockClass,
+            ),
           ),
         ),
       ),

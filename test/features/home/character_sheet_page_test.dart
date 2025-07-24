@@ -16,7 +16,9 @@ void main() {
       UncontrolledProviderScope(
         container: container,
         child: const MaterialApp(
-          home: CharacterSheetPage(characterId: 0),
+          home: Scaffold(
+            body: CharacterSheetPage(characterId: 0),
+          ),
         ),
       ),
     );

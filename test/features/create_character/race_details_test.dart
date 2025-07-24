@@ -23,6 +23,9 @@ void main() {
 
   Widget createWidgetUnderTest() {
     return ProviderScope(
+      overrides: [
+        raceImageIndexProvider.overrideWith((ref) => 1),
+      ],
       child: MaterialApp(
         home: Scaffold(
           body: RaceDetails(race: testRace),

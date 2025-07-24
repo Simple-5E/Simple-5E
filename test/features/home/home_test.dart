@@ -136,7 +136,7 @@ void main() {
     investigation: 0,
     nature: 0,
     religion: 0,
-    assetUri: 'assets/races/dragonborn_1.webp',
+    assetUri: 'assets/classes/barbarian.webp',
     id: 0,
   );
 
