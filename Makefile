@@ -148,10 +148,10 @@ docs:
 .PHONY: local-ci act-debug
 local-ci:
 	@echo "🔄 Running CI checks locally..."
-	@act --container-architecture linux/amd64 -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest -j build-and-test
+	@act --container-architecture linux/amd64 -P self-hosted=ghcr.io/catthehacker/ubuntu:act-latest -j build-and-test
 
 act-debug:
-	@act -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:full-latest -j build-and-test \
+	@act -P self-hosted=ghcr.io/catthehacker/ubuntu:full-latest -j build-and-test \
 		-s KEY_JKS="$(KEY_JKS)" \
 		-s KEY_PASSWORD="$(KEY_PASSWORD)" \
 		-s STORE_PASSWORD="$(STORE_PASSWORD)" \
