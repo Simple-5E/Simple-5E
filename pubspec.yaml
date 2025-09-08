@@ -50,7 +50,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  mockito: ^5.3.0
+  mockito: ^5.5.1
   build_runner: ^2.4.9
 
   # The "flutter_lints" package below contains a set of recommended lints to
